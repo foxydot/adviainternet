@@ -9,7 +9,7 @@ function do_page_title(){
 	global $post;
 	if(is_page()){
 		remove_all_actions('genesis_post_title');
-		add_action('genesis_post_title','');
+		add_action('genesis_post_title','msdlab_do_post_subtitle');
 		print '<div id="page-title" class="title-area"><div class="wrap"><h1 class="entry-title">'.get_the_title($post->ID).'</h1></div></div>';
 	}
 }
@@ -91,7 +91,7 @@ register_nav_menus( array(
  * Replace footer
  */
 remove_action('genesis_footer','genesis_do_footer');
-//add_action('genesis_footer','msdsocial_do_footer');
+add_action('genesis_footer','msdsocial_do_footer');
 function msdsocial_do_footer(){
 	global $msd_social;
 	if(has_nav_menu('footer_library_link')){$copyright .= wp_nav_menu( array( 'theme_location' => 'footer_library_link','container_class' => 'ftr-menu','echo' => FALSE ) ).'<br />';}

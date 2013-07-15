@@ -441,14 +441,6 @@ h1 {
 	font-size: 30px;
 }
 
-h1.entry-title {
-	font-size: 40px;
-	color: @blue;
-}
-.taxonomy-description h1 {
-	margin: 0;
-}
-
 h2,
 h2 a,
 h2 a:visited {
@@ -505,6 +497,16 @@ h5 {
 	font-size: 18px;
 }
 
+
+.post h1.entry-title, .page h2.entry-subtitle {
+	font-size: 40px;
+	color: @blue;
+}
+.taxonomy-description h1 {
+	margin: 0;
+}
+
+
 #page-title{
 	min-height: 170px;
 	background: @green url(../img/bkg-services.png) no-repeat center center;
@@ -512,7 +514,7 @@ h5 {
 		color: @white;
 		font-size: 5em;
 		text-align: center;
-		font-weight: bold;
+		font-weight: 700;
 		line-height: 2.2em;
 	}
 }
@@ -905,7 +907,6 @@ input.searchsubmit:hover {
 ------------------------------------------------------------ */
 
 #footer {
-	background: @dkgrey;
 	border: none;
 	position: relative;
 	bottom: 0;
@@ -933,11 +934,14 @@ input.searchsubmit:hover {
 }
 
 #footer .gototop {
-	width: 65%;
+	width: 100%;
 	font-size: 12px;
+	padding: .5em;
+	text-align: center;
 }
 
 #footer .creds {
+	display: none;
 	text-align: right;
 	width: 31%;
 }
