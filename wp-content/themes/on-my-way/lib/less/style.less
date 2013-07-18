@@ -211,18 +211,23 @@ body {
 		padding: 0; 
 		margin: 0;.border-radius(12px, 12px, 0, 0);
 			background: @ltgrey;
+			.drop-shadow(0, 1px, 8px, 0.4);
 		li {display: block;
 			border-bottom: 1px solid darken(@ltgrey,10%);
 			border-top: 1px solid lighten(@ltgrey,10%);
 			padding: 12px;
-			a{
+			position:relative;
+			>a{
 				background: @medgrey;
 				.rounded(20px);
 				color: white;
-				padding: 0.5em 1em;
+				padding: 0.5em 0;
+				text-align: center;
 				display: block;
+				width: 35px;
+				overflow: hidden;
 			}
-			li {border: none;}
+			ul.sub-menu{display: none;}
 		}
 		li.first-child {border-top:none;}
 		li.last-child {border-bottom:none;}
@@ -230,6 +235,9 @@ body {
 			a{
 				background:@green;
 			}
+		}
+		li:hover{
+			ul.sub-menu{display: block;}
 		}
 	}
 	.s {margin:0;width:200px;}
@@ -245,37 +253,49 @@ body {
 	color: @dkgrey;
 }
 
-/*Sub Menu Drop Down link*/
-#nav{
-	.menu-primary li li a,.menu-primary li li a:link,.menu-primary li li a:visited,.menu-secondary li li a,
-	.menu-secondary li li a:link,.menu-secondary li li a:visited,
-	#header .menu li li a,#header .menu li li a:link,#header .menu li li a:visited {
-		background: none;
-		border-top: none;
-		padding: .25em 1em;
-		width: 240px;
-	}
-}
-
-#nav{
+#nav .menu-primary{
 	.sub-menu{
 		position: absolute;
-		background-color: @beige;
+		left: 60px;
+		top: 0.5em;
+		margin: 0 0 0 4px;
+		.rounded(12px);
+		background: @ltgrey;
 		padding-left: 0;
 		.drop-shadow(0, 1px, 8px, 0.4);
 		li{
 			padding: 0.5em;
-			border-top: 1px solid @ltbeige !important;
+			display: block;
+			border-bottom: 1px solid darken(@ltgrey,10%);
+			border-top: 1px solid lighten(@ltgrey,10%);
 			margin: 0;
-			width: 100%;
+			width: 140px;
 			a{
-				padding: 0.5em;
+				.rounded(0);
+				padding: 0;
+				background: none;
+				border-top: none;
+				color: @medgrey;
+				width: auto;
+				text-align: left;
 			}
 		}
+		li.first-child {border-top:none;}
+		li.last-child {border-bottom:none;}
 		li:hover {
-			background: @dkbeige;
+			a{color:@blue;}
 		}
 	}
+	.sub-menu:before {
+    border-right: 8px solid @ltgrey;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    content: "";
+    display: inline-block;
+    top: 1em;
+    position: absolute;
+    left: -8px;
+}
 }
 
 /*Sub Menu Drop Down Hoveer */
