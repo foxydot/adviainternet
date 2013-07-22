@@ -14,7 +14,7 @@ function do_page_title(){
 	}
 }
 
-add_action('after_setup_theme','msd_child_add_homepage_hero3_sidebars');
+//add_action('after_setup_theme','msd_child_add_homepage_hero3_sidebars');
 function msd_child_add_homepage_hero3_sidebars(){
 	genesis_register_sidebar(array(
 	'name' => 'Homepage Hero',
@@ -35,6 +35,7 @@ function msd_child_add_homepage_callout_sidebars(){
 	'id' => 'homepage-callout'
 			));
 }
+add_action('after_setup_theme','register_taxonomy_scrollie');
 add_action('wp_head', 'collections');
 
 /**

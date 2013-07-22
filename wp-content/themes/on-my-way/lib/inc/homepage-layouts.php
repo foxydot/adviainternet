@@ -66,8 +66,19 @@ function msd_scrollie_page(){
 				</div>';
 	print '<div id="callout"><p>'.get_option('blogdescription').'</p></div>';
 	$my_wp_query = new WP_Query();
-	$pages = $my_wp_query->query(array('post_type' => 'page','order' => 'ASC','orderby' => 'menu_order'));
-	$children = get_page_children($post->ID, $pages);
+	$args = array(
+			'post_type' => 'page',
+			'order' => 'ASC',
+			'orderby' => 'menu_order',
+			'tax_query' => array(
+					array(
+						'taxonomy' => 'msd_scrollie',
+						'field' => 'slug',
+						'terms' => 'home'
+						)
+					)
+			);
+	$children = $my_wp_query->query($args);
 	$i = 1;
 	foreach($children AS $child){
 		$thumbnail = wp_get_attachment_image_src( get_post_thumbnail_id($child->ID), 'full' );
@@ -86,3 +97,41 @@ function msd_scrollie_page(){
 		$i++;
 	}
 }
+
+/**
+ * create a taxonomy for long scrollies
+ */
+function register_taxonomy_scrollie() {
+
+	$labels = array(
+			'name' => _x( 'Scrollie Sections', 'scrollie' ),
+			'singular_name' => _x( 'Scrollie Section', 'scrollie' ),
+			'search_items' => _x( 'Search Scrollie Sections', 'scrollie' ),
+			'popular_items' => _x( 'Popular Scrollie Sections', 'scrollie' ),
+			'all_items' => _x( 'All Scrollie Sections', 'scrollie' ),
+			'parent_item' => _x( 'Parent Scrollie Section', 'scrollie' ),
+			'parent_item_colon' => _x( 'Parent Scrollie Section:', 'scrollie' ),
+			'edit_item' => _x( 'Edit Scrollie Section', 'scrollie' ),
+			'update_item' => _x( 'Update Scrollie Section', 'scrollie' ),
+			'add_new_item' => _x( 'Add New Scrollie Section', 'scrollie' ),
+			'new_item_name' => _x( 'New Scrollie Section Name', 'scrollie' ),
+			'separate_items_with_commas' => _x( 'Separate scrollies with commas', 'scrollie' ),
+			'add_or_remove_items' => _x( 'Add or remove scrollies', 'scrollie' ),
+			'choose_from_most_used' => _x( 'Choose from the most used scrollies', 'scrollie' ),
+			'menu_name' => _x( 'Scrollie Sections', 'scrollie' ),
+	);
+
+	$args = array(
+			'labels' => $labels,
+			'public' => false,
+			'show_in_nav_menus' => false,
+			'show_ui' => true,
+			'show_tagcloud' => false,
+			'hierarchical' => true,
+
+			'rewrite' => true,
+			'query_var' => true
+	);
+
+	register_taxonomy( 'msd_scrollie', array('page'), $args );
+}	
