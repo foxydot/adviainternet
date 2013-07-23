@@ -50,3 +50,67 @@ function column_shortcode($atts, $content = null){
 }
 
 add_shortcode('columns','column_shortcode');
+
+function msd_inline_menu($atts){
+	extract( shortcode_atts( array(
+	'menu' => 'primary-links',
+	'walker' => 'msd_icon_desc_walker',
+	), $atts ) );
+	$walker = new $walker;
+	$defaults = array(
+			'menu'            => $menu,
+			'container'       => 'div',
+			'container_class' => '',
+			'container_id'    => '',
+			'menu_class'      => 'menu',
+			'menu_id'         => '',
+			'echo'            => false,
+			'fallback_cb'     => 'wp_page_menu',
+			'before'          => '',
+			'after'           => '',
+			'link_before'     => '<h3>',
+			'link_after'      => '</h3>',
+			'items_wrap'      => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+			'depth'           => 0,
+			'walker'          => $walker
+	);
+	return wp_nav_menu( $defaults );
+}
+add_shortcode('menu','msd_inline_menu');
+
+class msd_icon_desc_walker extends Walker_Nav_Menu {
+		function start_el(&$output, $item, $depth, $args) {
+			global $wp_query;
+			$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
+	
+			$class_names = $value = '';
+	
+			$classes = empty( $item->classes ) ? array() : (array) $item->classes;
+	
+			$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item ) );
+			$class_names = ' class="' . esc_attr( $class_names ) . '"';
+			
+			foreach ($item->classes AS $class){
+				if(stristr($class,'my-icon')){
+					$icon_class[] = preg_replace('/my\-/i', '', $class);
+				}
+			}
+			$icon_classes = ' class="'.implode(' ',$icon_class).'"';
+	
+			$output .= $indent . '<li id="menu-item-'. $item->ID . '"' . $value . $class_names .'>';
+	
+			$attributes = ! empty( $item->attr_title ) ? ' title="' . esc_attr( $item->attr_title ) .'"' : '';
+			$attributes .= ! empty( $item->target ) ? ' target="' . esc_attr( $item->target ) .'"' : '';
+			$attributes .= ! empty( $item->xfn ) ? ' rel="' . esc_attr( $item->xfn ) .'"' : '';
+			$attributes .= ! empty( $item->url ) ? ' href="' . esc_attr( $item->url ) .'"' : '';
+	
+			$item_output = $args->before;
+			$item_output .= '<a'. $attributes .'><i'.$icon_classes.'></i>';
+			$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
+			$item_output .= '<span class="sub">' . $item->description . '</span>';
+			$item_output .= '</a>';
+			$item_output .= $args->after;
+	
+			$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
+		}
+	}

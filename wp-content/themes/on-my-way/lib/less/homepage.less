@@ -40,6 +40,17 @@
 					.page-content{
 						color: @green;
 					}
+					/* Inline Menus */
+					.entry-content{
+						.menu{
+							li{
+								a{
+								}
+								a:hover{
+								}
+							}
+						}
+					}
 				}
 				#services{
 					background: @blue;
@@ -48,7 +59,33 @@
 						h2.entry-title{
 							color: @vltblue;
 						}
+						/* Inline Menus */
+						.entry-content{
+							.menu{
+								li{
+									a{
+										color: @vltblue;
+										i {
+											font-size: 2em;
+											color: @white;
+										}
+										h3 {
+											color: @vltblue;
+										}
+									}
+									a:hover{
+										i.icon-cog{
+										  -moz-animation: spin 2s infinite linear;
+										  -o-animation: spin 2s infinite linear;
+										  -webkit-animation: spin 2s infinite linear;
+										  animation: spin 2s infinite linear;
+										}
+									}
+								}
+							}
+						}
 					}
+					
 				}
 				#work{
 					background: @ltgrey;

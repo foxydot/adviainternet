@@ -551,7 +551,7 @@ h5 {
 .archive-page ul li,
 .entry-content ul li,
 .hentry ul li {
-	list-style: square inside url(../img/arrow.png);
+	list-style: square inside none;
 	margin-bottom: .25em;
 }
 
@@ -990,5 +990,29 @@ input.searchsubmit:hover {
 	p {font-size: 12px;}
 	 .readmore{
 	.button(@green);
+	}
+}
+/* Inline Menus */
+.entry-content{
+	.menu{
+		li{
+			list-style: none outside none;
+			width: 23%;
+			display: inline-block;
+			vertical-align: top;
+			padding: 1em;
+			a{
+				i{
+					display: inline-block;
+				}
+				h3 {
+					font-size: 1.6em;
+					margin: 0.5em 0;
+				}
+			}
+			a:hover{
+				text-decoration: none;
+			}
+		}
 	}
 }

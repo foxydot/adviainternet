@@ -53,13 +53,17 @@ function msd_child_homepage_widgets(){
  */
 function msd_scrollie_page(){
 	global $post;
+	$edit = get_edit_post_link($post->ID) != ''?'<a href="'.get_edit_post_link($post->ID).'"><i class="icon-edit"></i></a>':'';
 	$thumbnail = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full' );
 	$background = $thumbnail?' style="background-image:url('.$thumbnail[0].');"':'';
 	print '<div id="intro" class="scrollie parent div-intro div0">
 				<div class="background-wrapper"'.$background.'>
 						<div class="wrap">
 							<div class="page-content">
-								<div class="entry-content">'.apply_filters('the_content', $post->post_content).'</div>
+									<div class="entry-content">';
+	print apply_filters('the_content', $post->post_content);
+	print '						</div>
+							'.$edit.'
 							</div>
 						</div>
 					</div>
@@ -84,12 +88,14 @@ function msd_scrollie_page(){
 		$thumbnail = wp_get_attachment_image_src( get_post_thumbnail_id($child->ID), 'full' );
 		$background = $thumbnail?' style="background-image:url('.$thumbnail[0].');"':'';
 		$form = $child->post_name=='contact-us'?do_shortcode('[gravityform id="1" name="Untitled Form" title="false" ajax="true"]'):'';
-		print '<div id="'.$child->post_name.'" class="scrollie child div-'.$child->post_name.' div'.$i.'">
+		$edit = get_edit_post_link($child->ID) != ''?'<a href="'.get_edit_post_link($child->ID).'"><i class="icon-edit"></i></a>':'';
+		print '<div id="'.$child->post_name.'" class="scrollie child div-'.$child->post_name.' div'.$i.' trigger" postid="'.$child->ID.'">
 				<div class="background-wrapper"'.$background.'>
 						<div class="wrap">'.$form.'
 							<div class="page-content">
 								<h2 class="entry-title">'.$child->post_title.'</h2>
 								<div class="entry-content">'.apply_filters('the_content', $child->post_content).'</div>
+								'.$edit.'
 							</div>
 						</div>
 					</div>
