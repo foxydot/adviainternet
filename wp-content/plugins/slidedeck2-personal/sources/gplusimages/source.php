@@ -16,7 +16,7 @@ class SlideDeckSource_GPlusImages extends SlideDeck {
                 'data' => "string"
             ),
             'gplus_max_image_size' => array(
-                'value' => 1024,
+                'value' => 720,
                 'data' => "integer"
             )
         )
@@ -108,8 +108,8 @@ class SlideDeckSource_GPlusImages extends SlideDeck {
             $images[ $index ]['width'] = $entry->{'gphoto$width'}->{'$t'};
             $images[ $index ]['height'] = $entry->{'gphoto$height'}->{'$t'};
             $images[ $index ]['created_at'] = strtotime( $entry->published->{'$t'} );
-            $images[ $index ]['image'] = $entry->content->src;
-            $images[ $index ]['thumbnail'] = $entry->{'media$group'}->{'media$thumbnail'}[1]->url;
+            $images[ $index ]['image'] = preg_replace( '/^(http:|https:)/', '', $entry->content->src );
+            $images[ $index ]['thumbnail'] = preg_replace( '/^(http:|https:)/', '', $entry->{'media$group'}->{'media$thumbnail'}[1]->url );
             
             $url = "";
             foreach( $entry->link as $link ){
@@ -247,7 +247,7 @@ class SlideDeckSource_GPlusImages extends SlideDeck {
     function slidedeck_options( $options, $deprecated, $source ) {
         if( $source == $this->name ) {
             if( isset( $options['gplus_max_image_size'] ) )
-                $options['gplus_max_image_size'] = max( 128, min( (integer) $options['gplus_max_image_size'], 1600 ) );
+                $options['gplus_max_image_size'] = max( 94, min( (integer) $options['gplus_max_image_size'], 1600 ) );
         }
         
         return $options;

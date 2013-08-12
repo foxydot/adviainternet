@@ -1,9 +1,9 @@
 === SlideDeck 2 Personal for WordPress ===
 Contributors: dtelepathy, kynatro, jamie3d, dtrenkner, oriontimbers, nielsfogt, bkenyon, barefootceo, dtlabs
 Donate link: http://www.slidedeck.com/
-Tags: Slider, dynamic, responsive, image gallery, dtelepathy, digital telepathy, digital-telepathy, iPad, jquery, media, photo, pictures, plugin, posts, Search Engine Optimized, seo, skinnable, slide, slide show, slider, slideshow, theme, touch support, video, widget, Flickr, Instagram, 500px, RSS, Pinterest, Google+, Twitter, YouTube, Vimeo, Dailymotion, Picasa, Dribbble
+Tags: Slider, dynamic, responsive, image gallery, dtelepathy, digital telepathy, digital-telepathy, iPad, jquery, media, photo, pictures, plugin, posts, Search Engine Optimized, seo, skinnable, slide, slide show, slider, slideshow, theme, touch support, video, widget, Flickr, Instagram, 500px, RSS, Pinterest, Google+, YouTube, Vimeo, Dailymotion, Picasa, Dribbble
 Requires at least: 3.3
-Tested up to: 3.5
+Tested up to: 3.6
 Stable tag: trunk
 License: GPLv3
 
@@ -13,7 +13,7 @@ Create responsive content sliders on your WordPress blogging platform. Manage Sl
 
 = Responsive Content Slider by SlideDeck 2 =
 = Easily create responsive content sliders for your WordPress site without code. Use images & text, plus YouTube, Flickr, Pinterest & more =
-SlideDeck 2 for WordPress is a responsive slider plugin that lets you easily create content sliders out of almost any content. Connect to a variety of Content Sources like YouTube, Flickr, Twitter, WordPress posts and Pinterest to create gorgeous, dynamic sliders in a few clicks - no coding is required.
+SlideDeck 2 for WordPress is a responsive slider plugin that lets you easily create content sliders out of almost any content. Connect to a variety of Content Sources like YouTube, Flickr, WordPress posts and Pinterest to create gorgeous, dynamic sliders in a few clicks - no coding is required.
 
 **Requirements:** WordPress 3.3+, PHP5 and higher
 
@@ -37,6 +37,70 @@ Where 1644 is the SlideDeck's ID. You can also see this code snippet when you sa
 
 
 == Changelog ==
+= 2.3.3 =
+* Updated jquery request for IFRAME requests and insertion menu to accommodate for new WordPress 3.6 registered script structure
+
+= 2.3.2 =
+* Fixed an issue with the IE version detection snippet
+
+= 2.3 =
+* Add specification to ignore total_slides option for Custom Content SlideDecks, regardless of its value
+* Adjust registered script handling in IFRAME mode to make better accommodation for schema-less URLs
+* Fixed a style issue for Block Titles on iOS devices
+* Updated lense templates for better Lazy Loading handling
+* Introduced a better Support Modal with some FAQs
+* Removed Twitter as a source
+* Flickr Author links for Groups fixed
+
+= 2.2.1 =
+* Fixed an indexing issue with Lazy Loading Videos
+* Half Moon lens: Fixed an issue with videos on iOS
+* Block Title lens: Fixed an issue with videos on iOS
+* Flickr content source: fixed author URL linking for groups
+* Fixed a PHP notice in the widget class
+
+= 2.2 =
+* Fixed the `expansion_factor is not defined` error.
+* Fixed the `_preferred_image_size` is not defined error.
+* Added groudwork for custom CSS (available in Professional and higher).
+* Fixed issue where some SlideDeck scripts were being output on other plugin pages (eg: Gravity Forms)
+* Tool Kit Lens: Thumbnail images are now centered within the cropped frame.
+* Reporter Lens: Fixed an issue where the layout might not change even with an empty title.
+* Now includes Lazy Loading for image slides.
+* Now includes Lazy Loading for video slides.
+
+= 2.1.20130325 =
+* Reporter Lens: Fixed an issue where multiple decks on one page would not navigate correctly.
+* Added h1, h2, h3, h4, h5, h6, pre, address tags to allowed tag list in Image custom slide type.
+* Security improvements
+* Renamed language files for proper inclusion
+* Modified the way that custom taxonomies were looked up for the WordPress Posts Source
+* Modified our caching methods to better work with Object Caching setups
+* Added a new Advanced Option for aggressive cache flushing
+* Updated image source handling for Dribble, Flickr, Google+/Google+ Images, Instagram - will use current protocol i.e. http/https
+* Fixed some typos in plugin interfaces
+* Updated font additions to remove protocol from source URL
+
+= 2.1.20130228 =
+* Fixing an issue with the O-Town and Fashion Lens JavaScript files
+* Lenses can now have no variations and the variation dropdown is correctly hidden
+
+= 2.1.20130219 =
+* Updating the version of plupload in anticipation of jQuery 1.9
+* Removing all calls to jQuery.browser or $.browser in anticipation of jQuery 1.9
+* Updated custom slide CSS for images to fix an issue where the sd2-node-caption was showing up even though there was no content
+* Attempted a fix for the fullscreen images flashing issue.
+* Addressing an issue where editing a lens could result in a broken page
+
+= 2.1.20130116 =
+* Extracted a Regex for filtering images from feeds/sources, and added a filter for it `slidedeck_image_blacklist`
+* Google Plus Image (Picasa) source was updated to support the new resolutions specified in the API. See this: http://goo.gl/pjkKP for more info (search for `imgmax`)
+* Made an accommodation for a rare case where many WordPress custom taxonomies could make the WordPress Posts Source's taxonomy selector unusable
+* Updated the button style of the `Insert SlideDeck` button to match the new WordPress 3.5 and higher look
+* Tweaked the FancyForms dropdown styles so the z-indexing is no longer an issue
+* Adjusted the following lenses for a mobile/responsive bug: fashion, half-moon, o-town, reporter, tool-kit, twitter.
+* Fixed a warning message related to the $expansion_factor variable
+
 = 2.1.20121212 =
 * Updated references in activation routine to fix free to paid upgrade identification if free plugin was still activated
 * Help us make SlideDeck 2 better! Added optional anonymous usage statistics opt-in.
@@ -332,6 +396,30 @@ Where 1644 is the SlideDeck's ID. You can also see this code snippet when you sa
 * Initial beta release.
 
 == Upgrade Notice ==
+= 2.3.3 =
+HOTFIX: Compatibility updates for WordPress 3.6 and RESS/IFRAME rendered SlideDecks and insert SlideDeck views
+
+= 2.3.2 =
+Fixed a bug in IE detection script
+
+= 2.3 =
+Added Facebook and NextGEN Gallery sources for Professional and Developer tiers. Bug fixes. FAQs added for support.
+
+= 2.2 =
+Adds Lazy Loading for images and video
+
+= 2.1.20130325 =
+Bug fixes and better upgrade messaging
+
+= 2.1.20130228 =
+Fixing an issue with the O-Town and Fashion Lens JavaScript files
+
+= 2.1.20130219 =
+Preparing for jQuery 1.9, misc bug fixes
+
+= 2.1.20130116 =
+Collection of miscellaneous bug fixes
+
 = 2.1.20121212 =
 Many bug fixes, and lens CSS loading optimizations
 

@@ -1,7 +1,7 @@
 .lens-half-moon {
 	position: relative;
 	overflow: hidden;
-	margin: 0 auto;
+	margin: 0;
 }
 
 .lens-half-moon dl {
@@ -131,6 +131,16 @@
     display: none;
 }
 /* End video stuff */
+/* Extra video stuff */
+.lens-half-moon dd.sd2-hide-slide-content .slide-content,
+.lens-half-moon.sd2-is-ios dd.slide-type-video .slide-content,
+.lens-half-moon.sd2-is-ios dd.slide-type-video .date,
+.lens-half-moon dd.sd2-hide-slide-content .slide-content .slide-title,
+.lens-half-moon dd.sd2-hide-slide-content .full-slide-link-hit-area {
+    display: none !important;
+}
+/* End video stuff */
+
 
 .lens-half-moon.date-format-human-readable-abbreviated dd .slide-content,
 .lens-half-moon.sd2-show-author-avatar dd .slide-content,

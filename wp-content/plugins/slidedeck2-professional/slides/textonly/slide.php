@@ -145,7 +145,7 @@ class SlideDeckSlideType_TextOnly extends SlideDeckSlideModel {
 			update_post_meta( $slide->ID, "_layout", $data['_layout'] );
             update_post_meta( $slide->ID, "_permalink", $data['_permalink'] );
             
-			$post_excerpt = strip_tags( $data['post_excerpt'], "<p><a><strong><b><i><em><del><span><sup><sub><ul><ol><li>" );
+			$post_excerpt = strip_tags( $data['post_excerpt'], "<p><a><strong><b><i><em><del><span><sup><sub><ul><ol><li><h1><h2><h3><h4><h5><h6><pre>" );
 			$post_title = strip_tags( $data['post_title'] );
 			
 			$args = array(

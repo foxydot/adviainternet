@@ -89,6 +89,8 @@ along with SlideDeck.  If not, see <http://www.gnu.org/licenses/>.
                 </div>
                 
             </fieldset>
+
+            <?php do_action( "{$namespace}_before_options_group_wrapper", $slidedeck, $form_action ); ?>
             
             <fieldset id="slidedeck-section-options" class="slidedeck-form-section collapsible clearfix">
                 
@@ -100,6 +102,8 @@ along with SlideDeck.  If not, see <http://www.gnu.org/licenses/>.
                     <?php include( SLIDEDECK2_DIRNAME . '/views/elements/_options.php' ); ?>
                 </div>
             </fieldset>
+
+            <?php do_action( "{$namespace}_after_options_group_wrapper", $slidedeck, $form_action ); ?>
             
             <?php do_action( "{$namespace}_form_bottom", $slidedeck, $form_action ); ?>
             <div class="save-wrapper">
@@ -116,10 +120,7 @@ along with SlideDeck.  If not, see <http://www.gnu.org/licenses/>.
 </script>
 
 <?php if( isset( $_GET['firstsave'] ) ): ?>
-    <?php global $wp_scripts; ?>
-    <script type="text/javascript" src="<?php echo $wp_scripts->registered['zeroclipboard']->src; ?>"></script>
     <script type="text/javascript">
-        ZeroClipboard.setMoviePath('<?php echo SLIDEDECK2_URLPATH; ?>/js/zeroclipboard/ZeroClipboard10.swf');
         jQuery(document).ready(function(){SlideDeckPlugin.FirstSaveDialog.open(<?php echo $slidedeck['id']; ?>);});
     </script>
 <?php endif; ?>

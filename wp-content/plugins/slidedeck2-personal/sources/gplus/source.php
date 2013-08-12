@@ -213,7 +213,7 @@ class SlideDeckSource_GPlus extends SlideDeck {
                 'id' => $entry->id,
                 'title' => $title,
                 'permalink' => $entry->url,
-                'image' => $post_image,
+                'image' => preg_replace( '/^(http:|https:)/', '', $post_image ),
                 'video' => $post_video,
                 'author_name' => $author_name,
                 'author_url' => $author_url,

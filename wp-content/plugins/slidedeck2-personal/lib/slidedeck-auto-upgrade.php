@@ -165,6 +165,15 @@
 			}
 
 			$vars = json_decode($r['body'], true);
+            
+            // Capture the extra vairables
+            if( isset( $r['headers']['x-sd2-license-tier'] ) ) {
+                update_option( 'slidedeck2_cached_tier', $r['headers']['x-sd2-license-tier'] );
+            }
+            if( isset( $r['headers']['x-sd2-license-expires'] ) ) {
+                update_option( 'slidedeck2_cached_expiration', $r['headers']['x-sd2-license-expires'] );
+            }
+            
 			if( empty($vars) || !is_array($vars) || count($vars) > 4 || !isset($vars['new_version']) || !isset($vars['url']) || !isset($vars['package']) || !isset($vars['info'])) {
 				return self::$data[$slug] = null;
 			}
@@ -245,6 +254,8 @@
 	    
 	    if( $SlideDeckPlugin ){
             $key = (string) $SlideDeckPlugin->get_license_key();
+            $license = $SlideDeckPlugin->is_license_key_valid( $key );
+            if( $license->tier < 10 ) return false;
 	    }
 		return SLIDEDECK2_UPDATE_SITE . '/wordpress-update/' . md5( $key ) . '/tier_10';
 	}
@@ -258,6 +269,8 @@
 	    
 	    if( $SlideDeckPlugin ){
             $key = (string) $SlideDeckPlugin->get_license_key();
+            $license = $SlideDeckPlugin->is_license_key_valid( $key );
+            if( $license->tier < 20 ) return false;
 	    }
 		return SLIDEDECK2_UPDATE_SITE . '/wordpress-update/' . md5( $key ) . '/tier_20';
 	}
@@ -271,6 +284,8 @@
 	    
 	    if( $SlideDeckPlugin ){
             $key = (string) $SlideDeckPlugin->get_license_key();
+            $license = $SlideDeckPlugin->is_license_key_valid( $key );
+            if( $license->tier < 30 ) return false;
 	    }
 		return SLIDEDECK2_UPDATE_SITE . '/wordpress-update/' . md5( $key ) . '/tier_30';
 	}

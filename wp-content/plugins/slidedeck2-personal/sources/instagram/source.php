@@ -196,8 +196,8 @@ class SlideDeckSource_Instagram extends SlideDeck {
             $images[ $index ]['width'] = $entry->images->standard_resolution->width;
             $images[ $index ]['height'] = $entry->images->standard_resolution->height;
             $images[ $index ]['created_at'] = $entry->created_time;
-            $images[ $index ]['image'] = $entry->images->standard_resolution->url;
-            $images[ $index ]['thumbnail'] = $entry->images->thumbnail->url;
+            $images[ $index ]['image'] = preg_replace( '/^(http:|https:)/', '', $entry->images->standard_resolution->url );
+            $images[ $index ]['thumbnail'] = preg_replace( '/^(http:|https:)/', '', $entry->images->thumbnail->url );
             $images[ $index ]['permalink'] = $entry->link;
             $images[ $index ]['comments_count'] = $entry->comments->count;
             $images[ $index ]['likes_count'] = $entry->likes->count;
@@ -205,6 +205,7 @@ class SlideDeckSource_Instagram extends SlideDeck {
             $images[ $index ]['author_username'] = $entry->user->username;
             $images[ $index ]['author_avatar'] = $entry->user->profile_picture;
         }
+
 
         return $images;
     }

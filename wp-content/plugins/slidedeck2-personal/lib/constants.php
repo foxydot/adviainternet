@@ -40,6 +40,7 @@ if( !defined( 'SLIDEDECK2_DIRNAME' ) ) define( 'SLIDEDECK2_DIRNAME', dirname( di
 // The URL path of this plugin
 if( !defined( 'SLIDEDECK2_URLPATH' ) ) define( 'SLIDEDECK2_URLPATH', trailingslashit( plugins_url() ) . basename( SLIDEDECK2_DIRNAME ) );
 
+define( 'SLIDEDECK2_IMAGE_BLACKLIST',                '/(tweetmeme|stats|share-buttons|advertisement|feedburner|commindo|valueclickmedia|imediaconnection|adify|traffiq|premiumnetwork|advertisingz|gayadnetwork|vantageous|networkadvertising|advertising|digitalpoint|viraladnetwork|decknetwork|burstmedia|doubleclick).|feeds\.[a-zA-Z0-9\-_]+\.com\/~ff|wp\-digg\-this|feeds\.wordpress\.com|www\.scoop\.it\/rv|\/media\/post_label_source|ads\.pheedo\.com/i' );
 define( 'SLIDEDECK2_POST_TYPE',                      'slidedeck2' );
 define( 'SLIDEDECK2_SLIDE_POST_TYPE',                'sd2_custom_slide' );
 define( 'SLIDEDECK1_POST_TYPE',                      'slidedeck' );
@@ -49,6 +50,7 @@ define( 'SLIDEDECK2_CUSTOM_LENS_DIR',                WP_PLUGIN_DIR . "/slidedeck
 define( 'SLIDEDECK2_IS_AJAX_REQUEST',                ( !empty( $_SERVER['HTTP_X_REQUESTED_WITH'] ) && strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) == 'xmlhttprequest' ) );
 define( 'SLIDEDECK2_DEFAULT_LENS',                   'tool-kit' );
 define( 'SLIDEDECK2_UPDATE_SITE',                    'http://update.slidedeck.com' );
+define( 'SLIDEDECK2_RENEWAL_URL',                    'http://www.dtelepathy.com/dte-directbuy?item_id=11845' );
 
 // SlideDeck anonymous user hash
 define( 'SLIDEDECK2_USER_HASH', sha1( $_SERVER['HTTP_USER_AGENT'] . $_SERVER['REMOTE_ADDR'] ) );

@@ -3,7 +3,7 @@
 Plugin Name: SlideDeck 2 - Professional Addon Package
 Plugin URI: http://www.slidedeck.com/wordpress
 Description: Professional level addons for SlideDeck 2
-Version: 2.1.20121212
+Version: 2.3.3
 Author: digital-telepathy
 Author URI: http://www.dtelepathy.com
 License: GPL3
@@ -28,7 +28,7 @@ along with SlideDeck.  If not, see <http://www.gnu.org/licenses/>.
 
 if( !defined( "SLIDEDECK2_PROFESSIONAL_DIRNAME" ) ) define( "SLIDEDECK2_PROFESSIONAL_DIRNAME", dirname( __FILE__ ) );
 if( !defined( "SLIDEDECK2_PROFESSIONAL_URLPATH" ) ) define( "SLIDEDECK2_PROFESSIONAL_URLPATH", trailingslashit( plugins_url() ) . basename( SLIDEDECK2_PROFESSIONAL_DIRNAME ) );
-if( !defined( "SLIDEDECK2_PROFESSIONAL_VERSION" ) ) define( "SLIDEDECK2_PROFESSIONAL_VERSION", "2.1.20121212" );
+if( !defined( "SLIDEDECK2_PROFESSIONAL_VERSION" ) ) define( "SLIDEDECK2_PROFESSIONAL_VERSION", "2.3.2" );
 
 class SlideDeckPluginProfessional {
     var $namespace = "slidedeck-professional";
@@ -56,11 +56,21 @@ class SlideDeckPluginProfessional {
          * Translations can be added to the /languages/ directory.
          */
         load_plugin_textdomain( $this->slidedeck_namespace, false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
-        
+
+        add_action( 'admin_print_scripts-toplevel_page_' . SLIDEDECK2_HOOK, array( &$this, 'admin_print_scripts' ) );
+        add_action( 'admin_print_styles-toplevel_page_' . SLIDEDECK2_HOOK, array( &$this, 'admin_print_styles' ) );
+        add_action( 'init', array( &$this, 'wp_register_scripts' ), 2 );
+        add_action( 'init', array( &$this, 'wp_register_styles' ), 2 );
         add_filter( 'slidedeck_create_custom_slidedeck_block', array( &$this, 'slidedeck_create_custom_slidedeck_block' ), 20 );
         add_filter( 'slidedeck_get_lenses', array( &$this, 'slidedeck_get_lenses' ), 9, 2 );
         add_filter( 'slidedeck_get_slide_types', array( &$this, 'slidedeck_get_slide_types' ) );
+        add_action( 'slidedeck_after_options_group_wrapper', array( &$this, 'slidedeck_custom_css_field' ) );
+        add_action( 'slidedeck_after_save', array( &$this, 'slidedeck_save_custom_css_field' ), 10, 4 );
+        add_filter( 'slidedeck_footer_styles', array( &$this, 'slidedeck_add_custom_css' ), 22, 2 );
         
+        // Remove After Sources Filter for Source Upsell
+        remove_filter( "{$this->slidedeck_namespace}_source_modal_after_sources", array( $SlideDeckPlugin, 'slidedeck_source_modal_after_sources' ) );
+
         // Only load additional Slide Types if the Custom SlideDeck SlideDeckSlide class exists
         if( class_exists( "SlideDeckSlideModel" ) ) {
             $slide_type_files = (array) glob( SLIDEDECK2_PROFESSIONAL_DIRNAME . '/slides/*/slide.php' );
@@ -98,6 +108,24 @@ class SlideDeckPluginProfessional {
                 }
             }
         }
+
+        $source_files = (array) glob( SLIDEDECK2_PROFESSIONAL_DIRNAME . '/sources/*/source.php' );
+        foreach( (array) $source_files as $filename ) {
+            if( is_readable( $filename ) ) {
+                include_once ($filename);
+
+                $slug = basename( dirname( $filename ) );
+                $classname = slidedeck2_get_classname_from_filename( dirname( $filename ) );
+                $prefix_classname = "SlideDeckSource_{$classname}";
+                if( class_exists( $prefix_classname ) ) {
+                    $SlideDeckPlugin->sources[$slug] = new $prefix_classname;
+                } elseif( class_exists( "{$prefix_classname}Content" ) && $slug == "custom" ) {
+                    $custom_content_classname = "{$prefix_classname}Content";
+                    $SlideDeckPlugin->sources[$slug] = new $custom_content_classname;
+                }
+            }
+        }
+
     }
 
     static function activate() {
@@ -110,6 +138,58 @@ class SlideDeckPluginProfessional {
         update_option( "slidedeck2_professional_version", SLIDEDECK2_PROFESSIONAL_VERSION );
     }
     
+    /**
+     * Load JavaScript for the admin options page
+     *
+     * @uses wp_enqueue_script()
+     */
+    function admin_print_scripts() {
+        wp_enqueue_script( "{$this->namespace}-admin" );
+        wp_enqueue_script( 'slidedeck-fancy-form' );
+        wp_enqueue_script( 'codemirror' );
+        wp_enqueue_script( 'codemirror-mode-css' );
+        wp_enqueue_script( 'codemirror-mode-javascript' );
+        wp_enqueue_script( 'codemirror-mode-clike' );
+        wp_enqueue_script( 'codemirror-mode-php' );
+    }
+
+    /**
+     * Load stylesheets for the admin pages
+     *
+     * @uses wp_enqueue_style()
+     * @uses SlideDeckPlugin::is_plugin()
+     */
+    function admin_print_styles() {
+        global $SlideDeckPlugin;
+
+        wp_enqueue_style( "{$this->namespace}-admin" );
+
+        if( $SlideDeckPlugin->is_plugin() ) {
+            wp_enqueue_style( 'codemirror' );
+            wp_enqueue_style( 'codemirror-theme-default' );
+        }
+    }
+
+    function get_custom_css( $id, $prepend = false ) {
+        global $SlideDeckPlugin;
+
+        $custom_css = get_post_meta( $id, $SlideDeckPlugin->namespace . '_custom_css', true );
+
+        if( $prepend ) {
+            /**
+             * Add a dummy comma. The leading comma ensures that the
+             * preg_match does its job more reliably. We remove it after.
+             */
+            $custom_css = ',' . $custom_css;
+            // Process the CSS and append the deck ID
+            $custom_css = preg_replace( '/([,|\}][\s$]*)([\.#]?-?[_a-zA-Z]+[_a-zA-Z0-9-]*)/m', '$1.' . $SlideDeckPlugin->namespace . '-custom-css-wrapper-' . $id . ' $2', $custom_css );
+            // remove the dummy comma
+            $custom_css = ltrim( $custom_css, ',' );
+        }
+
+        return $custom_css;
+    }
+
     /**
      * Initialization function to hook into the WordPress init action
      * 
@@ -145,6 +225,26 @@ class SlideDeckPluginProfessional {
         ob_end_clean();
         
         return $html;
+    }
+
+    function slidedeck_custom_css_field( $slidedeck ) {
+        global $SlideDeckPlugin;
+
+        $custom_css = $this->get_custom_css( $slidedeck['id'] );
+        $help_message = sprintf(__('See  %1$sour knowlegde base%2$s for tips on using this section and writing selectors.'), "<a href='http://dtelepathy.zendesk.com/entries/21769140' target='_blank'>", '</a>');
+        include( SLIDEDECK2_PROFESSIONAL_DIRNAME . '/views/_custom-css-block.php' );
+    }
+
+    function slidedeck_save_custom_css_field( $id, $data, $deprecated, $sources ) {
+        global $SlideDeckPlugin;
+
+        $custom_css = $_REQUEST['custom_css'];
+        update_post_meta( $id, $SlideDeckPlugin->namespace . '_custom_css', $custom_css );
+    }
+
+    function slidedeck_add_custom_css( $styles, $slidedeck ) {
+        $custom_css = $this->get_custom_css( $slidedeck['id'], true );
+        return $styles . $custom_css;
     }
     
     /**
@@ -206,6 +306,37 @@ class SlideDeckPluginProfessional {
         
         return $slide_types;
     }
+
+    /**
+     * Register scripts used by this plugin for enqueuing elsewhere
+     *
+     * @uses wp_register_script()
+     */
+    function wp_register_scripts() {
+        // Admin JavaScript
+        wp_register_script( "{$this->namespace}-admin", SLIDEDECK2_PROFESSIONAL_URLPATH . "/js/admin" . ( SLIDEDECK2_ENVIRONMENT == 'development' ? '.dev' : '' ) . ".js", array( 'jquery', 'slidedeck-admin' ), SLIDEDECK2_PROFESSIONAL_VERSION, true );
+        
+        // CodeMirror JavaScript Library
+        wp_register_script( "codemirror", SLIDEDECK2_PROFESSIONAL_URLPATH . "/js/codemirror/codemirror.js", array(), '2.25', true );
+        wp_register_script( "codemirror-mode-css", SLIDEDECK2_PROFESSIONAL_URLPATH . "/js/codemirror/mode/css.js", array( 'codemirror' ), '2.25', true );
+        wp_register_script( "codemirror-mode-htmlmixed", SLIDEDECK2_PROFESSIONAL_URLPATH . "/js/codemirror/mode/htmlmixed.js", array( 'codemirror' ), '2.25', true );
+        wp_register_script( "codemirror-mode-javascript", SLIDEDECK2_PROFESSIONAL_URLPATH . "/js/codemirror/mode/javascript.js", array( 'codemirror' ), '2.25', true );
+        wp_register_script( "codemirror-mode-clike", SLIDEDECK2_PROFESSIONAL_URLPATH . "/js/codemirror/mode/clike.js", array( 'codemirror' ), '2.25', true );
+        wp_register_script( "codemirror-mode-php", SLIDEDECK2_PROFESSIONAL_URLPATH . "/js/codemirror/mode/php.js", array( 'codemirror', 'codemirror-mode-clike' ), '2.25', true );
+    }
+
+    /**
+     * Register styles used by this plugin for enqueuing elsewhere
+     *
+     * @uses wp_register_style()
+     */
+    function wp_register_styles() {
+        // Professional Tier Admin Stylesheet
+        wp_register_style( "{$this->namespace}-admin", SLIDEDECK2_PROFESSIONAL_URLPATH . "/css/admin.css", array(), '2.1', 'screen' );
+        // CodeMirror Library
+        wp_register_style( "codemirror", SLIDEDECK2_PROFESSIONAL_URLPATH . "/css/codemirror.css", array(), '2.25', 'screen' );
+    }
+
 }
 
 register_activation_hook( __FILE__, array( 'SlideDeckPluginProfessional', 'activate' ) );

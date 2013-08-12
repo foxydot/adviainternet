@@ -197,27 +197,7 @@ var tb_position = updateTBSize;
         elems: {},
         
         onComplete: function(){
-            var self = this,
-                clip = new ZeroClipboard.Client(),
-                $action = $('#slidedeck-publish-method-copy-paste .action');
-            var $clipButton = $action.find('.slidedeck-copy-to-clipboard');
-            var $clipMessage = $action.find('.complete-message');
-            
-            clip.setText($action.find('input[type="text"]').val());
-            $action.append(clip.getHTML($clipButton.outerWidth(),$clipButton.outerHeight()));
-            
-            clip.addEventListener('onMouseOver', function(){
-                $clipButton.addClass('hover');
-            });
-            clip.addEventListener('onMouseOut', function(){
-                $clipButton.removeClass('hover').removeClass('active');
-            });
-            clip.addEventListener('onMouseDown', function(){
-                $clipButton.addClass('active');
-            });
-            clip.addEventListener('onComplete', function(){
-                $clipMessage.fadeIn();
-            });
+            var self = this;
             
             // Bind don't show to checkbox
             $('#first-save-do-not-show-again').find('input').bind('click', function(event){
@@ -752,7 +732,7 @@ var tb_position = updateTBSize;
             var $optionGroup = this.elems.optionsGroupsLists.eq(optionIndex);
             
             // Reset the .inner div to height: auto in case height was set by collapsible toggle
-            $('#slidedeck-section-options > div.inner').css({'height': 'auto'});
+            //$('#slidedeck-section-options > div.inner').css({'height': 'auto'});
             
             // Adjust the height of the option group area so only this group is shown
             this.elems.optionsGroups.stop().animate({
@@ -1926,16 +1906,22 @@ var tb_position = updateTBSize;
             var cookieVal = null;
             var inner_height = $.data($inner[0], 'inner_height');
             var animate_height = inner_height;
-            
+            var after_height = 0;
+
             // Open
             if($section.hasClass('closed')){
                 $section.removeClass('closed');
+                $section.find('.inner').height('auto');
+                animate_height = $section.find('.inner').height();
+                after_height = 'auto';
+                $section.find('.inner').height(0);
             }
             // Close
             else {
                 $.data($inner[0], 'inner_height', $inner.height());
                 $section.addClass('closed');
                 animate_height = 0;
+                after_height = 0;
                 cookieVal = 1;
             }
             
@@ -1943,6 +1929,7 @@ var tb_position = updateTBSize;
                 height: animate_height + 'px'
             }, 500, function(){
                 $this.removeClass('animating');
+                $section.find('.inner').height(after_height);
             });
             // Set open state
             $.cookie(cookieName, cookieVal);
@@ -1962,7 +1949,7 @@ var tb_position = updateTBSize;
             
             // Cache the fieldset element
             $.data(this, '$section', $section);
-            
+
             // Log the opened height for use in the collapse action
             $.data($inner[0], 'inner_height', $inner.height());
             
@@ -2189,6 +2176,25 @@ var tb_position = updateTBSize;
         
         updateTBSize();
         
+        var expiredFor = Math.round( new Date().getTime() / 1000 ) - SlideDeckLicenseExpiredOn;
+        if( expiredFor < 1209600 ) {
+            // Refresh the upgrade/renew button with fresh content
+            // Only if the last saved expiration date is expired.
+            if( $('div.upgrade-button-cta').length ) {
+                if( SlideDeckLicenseExpired ) {
+                    $.ajax({
+                        url: ajaxurl,
+                        data: "action=slidedeck_check_license_expiry&_license_status_nonce=" + $('div.upgrade-button-cta').data('nonce') + "&context=" + $('div.upgrade-button-cta').data('context'),
+                        type: 'GET',
+                        complete: function(data){
+                            $('div.upgrade-button-cta').replaceWith( data.responseText );
+                        }
+                    });
+                }
+            }
+        }
+
+
         // SlideDeck.com blog RSS feed AJAX update
         if($('#slidedeck-blog-rss-feed').length){
             $.ajax({
@@ -2207,82 +2213,6 @@ var tb_position = updateTBSize;
                 }
             });
         }
-        
-        // Tweet SlideDeck on manage page AJAX update
-        if($('#slidedeck-latest-tweets').length){
-            $.ajax({
-                url: ajaxurl,
-                data: "action=slidedeck2_tweet_feed",
-                type: 'GET',
-                complete: function(data){
-                    var response = data.responseText;
-                    var responseBlock = $('#slidedeck-latest-tweets');
-                    
-                    if(response != "false"){
-                        responseBlock.html(data.responseText);
-                        
-                        // Create tha deck!
-                        var tweetSlideDeck = responseBlock.find('.slidedeck').slidedeck({
-                            hideSpines: true,
-                            keys: false,
-                            scroll: false,
-                            autoPlay: true,
-                            cycle: true
-                        });
-                        
-                        // Bind Prev/Next
-                        responseBlock.find('a.navigation').click(function(event){
-                            event.preventDefault();
-                            tweetSlideDeck.pauseAutoPlay = true;
-                            if( this.href.match(/next/) ){
-                                tweetSlideDeck.next();
-                            }else{
-                                tweetSlideDeck.prev();
-                            }
-                        });
-                        
-                        // Add dot navigation
-                        var slideCount = tweetSlideDeck.slides.length;
-                        var navWrapper = responseBlock.find('.nav-wrapper');
-                        var i = 1;
-                        while(i <= slideCount && i <= 10){
-                            jQuery('<span class="nav-dot">&bull;</span>').appendTo(navWrapper);
-                            i++;
-                        }
-                        
-                        // Bind click to the nav dots
-                        navWrapper.find('.nav-dot').click(function(){
-                            var $self = jQuery(this);
-                            navWrapper.find('.nav-dot').removeClass('active');
-                            $self.addClass('active');
-                            tweetSlideDeck.pauseAutoPlay = true;
-                            tweetSlideDeck.goTo($self.index()+1);
-                        });
-                        
-                        // Add the before callback to update the dot nav
-                        tweetSlideDeck.options.before = function( deck ){
-                            responseBlock.find('.nav-dot').removeClass('active');
-                            responseBlock.find('.nav-dot').eq(deck.current-1).addClass('active');
-                        };
-                        
-                        // Do the initial dot nav update 
-                        tweetSlideDeck.loaded(function( deck ){
-                            responseBlock.find('.nav-dot').eq(deck.current-1).addClass('active');
-                        });
-                        
-                        // Center the dot nav
-                        responseBlock.find('.nav-wrapper').css({
-                            marginLeft: '-' + Math.round( responseBlock.find('.nav-wrapper').outerWidth() / 2 ) + 'px'
-                        });
-                        
-                        
-                    } else {
-                        responseBlock.text("Unable to connect to Twitter!");
-                    }
-                }
-            });
-        }
-        
         
         if($('#slidedeck-sizes').length){
             $('#slidedeck-section-options').delegate('#slidedeck-sizes input[type="radio"]', 'click', function(event){
@@ -2356,7 +2286,7 @@ var tb_position = updateTBSize;
             SlideDeckPlugin.UpgradeModal = {
                 addForClass: function( theClass ){
                     // Remove the previous pattern
-                    $('#slidedeck-' + context + '-simplemodal')[0].className = $('#slidedeck-' + context + '-simplemodal')[0].className.replace(/for\-[a-z]+\s?/, '');
+                    $('#slidedeck-' + context + '-simplemodal')[0].className = $('#slidedeck-' + context + '-simplemodal')[0].className.replace(/for(\-[a-z]+)+\s?/, '');
                     // Add the new class
                     $('#slidedeck-' + context + '-simplemodal').addClass( 'for-' + theClass );
                 },
@@ -2389,6 +2319,46 @@ var tb_position = updateTBSize;
             });
         }
         
+        // Bind the "Get Support?" Link for Personal/Professional/Developer
+        $('.wp-submenu a[href$="slidedeck2.php/support"], #slidedeck-support-questions a[href$="slidedeck2.php/support"]').addClass('support-modal').attr('rel', 'get-support');
+
+        // Modals for the Support
+        if( $('.support-modal').length ){
+            var supportModalContext = 'support';
+            
+            // Generic Support modal.
+            SlideDeckPlugin.SupportModal = {
+                addForClass: function( theClass ){
+                    // Remove the previous pattern
+                    $('#slidedeck-' + supportModalContext + '-simplemodal')[0].className = $('#slidedeck-' + supportModalContext + '-simplemodal')[0].className.replace(/for(\-[a-z]+)+\s?/, '');
+                    // Add the new class
+                    $('#slidedeck-' + supportModalContext + '-simplemodal').addClass( 'for-' + theClass );
+                },
+                
+                open: function(data){
+                    var self = this;
+                    
+                    if(!this.modal){
+                        this.modal = new SimpleModal({
+                            context: supportModalContext
+                        });
+                    }
+                    this.modal.open(data);
+                }
+            };
+            
+            $('#wpwrap').delegate( '.support-modal', 'click', function(event){
+                event.preventDefault();
+                
+                var slug = $(this).attr('rel'); 
+                
+                $.get(ajaxurl + "?action=slidedeck_support_modal_content", function(data){
+                    SlideDeckPlugin.SupportModal.open(data);
+                    SlideDeckPlugin.SupportModal.addForClass( slug );
+                });
+            });
+        }
+        
         if( !SlideDeckAnonymousStats.opted ) {
             SlideDeckPlugin.anonymousStatsOptinModal = new SimpleModal({
                 context: "anonymous-stats",
@@ -2413,7 +2383,6 @@ var tb_position = updateTBSize;
                 SlideDeckPlugin.anonymousStatsOptinModal.open(data);
             });
         }
-
     }); // End of DOM Ready
     
     

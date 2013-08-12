@@ -610,7 +610,8 @@ class SlideDeckSlideType_Image extends SlideDeckSlideModel {
              * some browsers (mostly Chrome) chug and is bad for the end user too.
              */
             $slidedeck_dimensions = $SlideDeckPlugin->get_dimensions( $slidedeck );
-            
+            $expansion_factor = 1;
+            if( !isset( $slide->meta['_preferred_image_size'] ) ) $slide->meta['_preferred_image_size'] = 'auto'; 
             // Set the expansion factor based on the auto or auto_100 options
             if( $slide->meta['_preferred_image_size'] == 'auto' ) {
                 $expansion_factor = 1.2; // 120%
@@ -666,7 +667,7 @@ class SlideDeckSlideType_Image extends SlideDeckSlideModel {
             update_post_meta( $slide->ID, "_image_scaling", strip_tags( $data['_image_scaling'] ) );
             update_post_meta( $slide->ID, "_preferred_image_size", $data['_preferred_image_size'] );
 	
-			$post_excerpt = strip_tags( $data['post_excerpt'], "<p><a><strong><b><i><em><del><span><sup><sub><ul><ol><li>" );
+			$post_excerpt = strip_tags( $data['post_excerpt'], "<p><a><strong><b><i><em><del><span><sup><sub><ul><ol><li><h1><h2><h3><h4><h5><h6><pre><address>" );
 			$post_title = strip_tags( $data['post_title'] );
 			
 			$args = array(

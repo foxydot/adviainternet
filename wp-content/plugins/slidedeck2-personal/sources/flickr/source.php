@@ -98,17 +98,19 @@ class SlideDeckSource_Flickr extends SlideDeck {
             // Loop through each item to build an array of slides
             $counter = 0;
             foreach( $rss_items as $index => $item ){
+
                 $images[ $index ]['title'] = $item->get_title();
                 $images[ $index ]['width'] = $item->get_enclosure()->width;
                 $images[ $index ]['height'] = $item->get_enclosure()->height;
                 $images[ $index ]['created_at'] = strtotime( $item->get_date( "Y-m-d H:i:s" ) );
-                $images[ $index ]['image'] = $item->get_enclosure()->link;
-                $images[ $index ]['thumbnail'] = $item->get_enclosure()->thumbnails[0];
+                $images[ $index ]['image'] = preg_replace( '/^(http:|https:)/', '', $item->get_enclosure()->link );
+                $images[ $index ]['thumbnail'] = preg_replace( '/^(http:|https:)/', '', $item->get_enclosure()->thumbnails[0] );
                 $images[ $index ]['permalink'] = $item->get_permalink();
                 $images[ $index ]['content'] = $images[ $index ]['description'] = $item->get_content();
                 
+                $author_tags = $item->get_item_tags(SIMPLEPIE_NAMESPACE_RSS_20, 'author');
                 $images[ $index ]['author_name'] = $item->get_enclosure()->credits[0]->name;
-                $images[ $index ]['author_url'] = 'http://www.flickr.com/photos/' . $slidedeck['options']['flickr_userid'];
+                $images[ $index ]['author_url'] = $author_tags[0]['attribs']['urn:flickr:user']['profile'];
             }
         }        
         

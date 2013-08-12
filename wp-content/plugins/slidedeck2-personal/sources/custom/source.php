@@ -463,7 +463,7 @@ class SlideDeckSource_CustomContent extends SlideDeck {
                 $filtered_content = do_shortcode( shortcode_unautop( wpautop( convert_chars( convert_smilies( wptexturize( $content ) ) ) ) ) );
                 
                 if( isset( $video_meta ) ){
-                    $video_container = "<div id=\"video__{$video_meta['id']}__{$slidedeck['id']}-{$deck_iteration}-{$slide_counter}\" class=\"{$video_meta['service']} video-container\" data-video-id=\"{$video_meta['id']}\"></div>";
+                    $video_container = "<div id=\"video__{$video_meta['id']}__{$slidedeck['id']}-{$deck_iteration}\" class=\"{$video_meta['service']} video-container\" data-video-id=\"{$video_meta['id']}\"></div>";
                 }
                 
                 ob_start();

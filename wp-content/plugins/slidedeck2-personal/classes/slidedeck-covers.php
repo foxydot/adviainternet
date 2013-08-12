@@ -197,7 +197,7 @@ class SlideDeckCovers {
         
         $cache_key = $this->namespace . "--" . md5( __METHOD__ . $parent_slidedeck_id );
         
-        $cover = wp_cache_get( $cache_key, "{$this->namespace}-cover-get" );
+        $cover = wp_cache_get( $cache_key, slidedeck2_cache_group( 'cover-get' ) );
         
         if( $cover == false ) {
             $cover_defaults = $this->get_defaults( $slidedeck_id );
@@ -235,7 +235,7 @@ class SlideDeckCovers {
                 }
             }
             
-            wp_cache_set( $cache_key, $cover, "{$this->namespace}-cover-get" );
+            wp_cache_set( $cache_key, $cover, slidedeck2_cache_group( 'cover-get' ) );
         }
 
         return $cover;

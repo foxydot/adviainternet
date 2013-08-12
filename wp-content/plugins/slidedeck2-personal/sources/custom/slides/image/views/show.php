@@ -7,9 +7,9 @@ $default_caption_position = $slide->meta['_caption_position'];
 ?>
 <ul class="slide-content-fields">
     <li class="select-source">
-    	<label><?php _e( "Upload an Image", $namespace ); ?><input type="radio" name="_image_source" class="fancy" value="upload"<?php if( $default_source == "upload" ) echo ' checked="checked"'; ?> /></label>
-    	<label><?php _e( "Specify a URL", $namespace ); ?><input type="radio" name="_image_source" class="fancy" value="url"<?php if( $default_source == "url" ) echo ' checked="checked"'; ?> /></label>
-    	<label><a href="<?php echo admin_url( 'media-upload.php?post_id=' . $parent_slidedeck_id . '&tab=library&slidedeck_custom=1&slide_id=' . $slide->ID . '&TB_iframe=1&width=640&height=515' ); ?>" class="thickbox" title="<?php _e( 'Add Media' ); ?>"><?php _e( "From Media Library", $namespace ); ?></a><input type="radio" name="_image_source" class="fancy" value="medialibrary"<?php if( $default_source == "medialibrary" ) echo ' checked="checked"'; ?> /></label>
+        <label><?php _e( "Upload an Image", $namespace ); ?><input type="radio" name="_image_source" class="fancy" value="upload"<?php if( $default_source == "upload" ) echo ' checked="checked"'; ?> /></label>
+        <label><?php _e( "Specify a URL", $namespace ); ?><input type="radio" name="_image_source" class="fancy" value="url"<?php if( $default_source == "url" ) echo ' checked="checked"'; ?> /></label>
+        <label><a href="<?php echo admin_url( 'media-upload.php?post_id=' . $parent_slidedeck_id . '&tab=library&slidedeck_custom=1&slide_id=' . $slide->ID . '&TB_iframe=1&width=640&height=515' ); ?>" class="thickbox" title="<?php _e( 'Add Media' ); ?>"><?php _e( "From Media Library", $namespace ); ?></a><input type="radio" name="_image_source" class="fancy" value="medialibrary"<?php if( $default_source == "medialibrary" ) echo ' checked="checked"'; ?> /></label>
     </li>
 
     <li id="sd-image-upload-container">&nbsp;</li>
@@ -25,15 +25,15 @@ $default_caption_position = $slide->meta['_caption_position'];
     
     <li>
         <ul>
-        	<?php foreach( $layouts as $layout => $label ): ?>
-        		<li class="layout">
-        			<label <?php if( $default_layout == $layout ) echo 'class="active-layout"'; ?>>
-        				<img src="<?php echo $url; ?>/images/layout-thumbnail-<?php echo $layout; ?>.png" alt="<?php echo $label; ?>" />
-        				<span class="label"><?php echo $label; ?></span>
-        				<input type="radio" name="_layout" value="<?php echo $layout; ?>"<?php if( $slide->meta['_layout'] == $layout ) echo ' checked="checked"'; ?> />
-        			</label>
-        		</li>
-        	<?php endforeach; ?>
+            <?php foreach( $layouts as $layout => $label ): ?>
+                <li class="layout">
+                    <label <?php if( $default_layout == $layout ) echo 'class="active-layout"'; ?>>
+                        <img src="<?php echo $url; ?>/images/layout-thumbnail-<?php echo $layout; ?>.png" alt="<?php echo $label; ?>" />
+                        <span class="label"><?php echo $label; ?></span>
+                        <input type="radio" name="_layout" value="<?php echo $layout; ?>"<?php if( $slide->meta['_layout'] == $layout ) echo ' checked="checked"'; ?> />
+                    </label>
+                </li>
+            <?php endforeach; ?>
         </ul>
     </li>
     

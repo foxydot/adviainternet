@@ -80,6 +80,7 @@ header iframe.slidedeck-iframe-embed { margin: 0; }
 }
 /* Extra video stuff */
 .lens-block-title dd.sd2-hide-slide-content .slide-content,
+.lens-block-title.sd2-is-ios dd.slide-type-video .slide-content,
 .lens-block-title dd.sd2-hide-slide-content .slide-content .slide-title,
 .lens-block-title dd.sd2-hide-slide-content .full-slide-link-hit-area {
     display: none !important;

@@ -65,7 +65,7 @@ class SlideDeck {
                 'data' => "integer",
                 'attr' => array(
                     'size' => 3,
-                    'maxlength' => 2
+                    'maxlength' => 3
                 ),
                 'value' => 5,
                 'label' => "Number of Slides",
@@ -1250,8 +1250,11 @@ class SlideDeck {
         	}
         }
         
+        $total_slides = $slidedeck['options']['total_slides'];
+        if( in_array( "custom", $slidedeck['source'] ) ) $total_slides = 9999;
+
         // Truncate the slides down to the limit the user specified
-        $slides = array_slice( $slides, 0, $slidedeck['options']['total_slides'] );
+        $slides = array_slice( $slides, 0, $total_slides );
         
 		return $slides;
 	}
@@ -1320,7 +1323,7 @@ class SlideDeck {
             $cache_key.= "-" . $this->_cache_get_buster();
         }
         
-        $slidedecks = wp_cache_get( $cache_key, "{$this->namespace}-get" );
+        $slidedecks = wp_cache_get( $cache_key, slidedeck2_cache_group( 'get' ) );
         
         if( $slidedecks == false ) {
             $query_posts = $wpdb->get_results( $sql );
@@ -1345,7 +1348,7 @@ class SlideDeck {
                 $slidedecks[] = $slidedeck;
             }
             
-            wp_cache_set( $cache_key, $slidedecks, "{$this->namespace}-get" );
+            wp_cache_set( $cache_key, $slidedecks, slidedeck2_cache_group( 'get' ) );
         }
 
         if( $orderby == "slidedeck_source" ) {
@@ -1466,7 +1469,7 @@ class SlideDeck {
         
         $cache_key = $this->namespace . "--" . md5( $sql );
         
-        $parent_id = wp_cache_get( $cache_key, "{$this->namespace}-get-parent-id" );
+        $parent_id = wp_cache_get( $cache_key, slidedeck2_cache_group( 'get-parent-id' ) );
         
         if( $parent_id == false ) {
             $row = $wpdb->get_row( $sql );
@@ -1479,7 +1482,7 @@ class SlideDeck {
                 $parent_id = $row->ID;
             }
             
-            wp_cache_set( $cache_key, $parent_id, "{$this->namespace}-get-parent-id" );
+            wp_cache_set( $cache_key, $parent_id, slidedeck2_cache_group( 'get-parent-id' ) );
         }
         
         return $parent_id;
@@ -1797,7 +1800,7 @@ class SlideDeck {
     function get_options( $id, $deprecated, $lens, $source ) {
         $cache_key = $this->namespace . "--" . md5( serialize( func_get_args() ) );
         
-        $options = wp_cache_get( $cache_key, "{$this->namespace}-options" );
+        $options = wp_cache_get( $cache_key, slidedeck2_cache_group( 'options' ) );
         
         if( $options == false ) {
             $stored_options = (array) get_post_meta( $id, "{$this->namespace}_options", true );
@@ -1806,7 +1809,7 @@ class SlideDeck {
             
             $options = array_merge( (array) $default_options, $stored_options );
             
-            wp_cache_set( $cache_key, $options, "{$this->namespace}-options" );
+            wp_cache_set( $cache_key, $options, slidedeck2_cache_group( 'options' ) );
         }
         
         return $options;
@@ -1930,6 +1933,9 @@ class SlideDeck {
         if( file_exists( SLIDEDECK2_DIRNAME . $filename ) ) {
             wp_register_script( "slidedeck-deck-{$this->name}-admin", SLIDEDECK2_URLPATH . $filename, array( 'jquery', 'slidedeck-admin' ), SLIDEDECK2_VERSION, true );
         }
+        // if( file_exists( SLIDEDECK2_PROFESSIONAL_DIRNAME . $filename ) ) {
+            // wp_register_script( "slidedeck-deck-{$this->name}-admin", SLIDEDECK2_PROFESSIONAL_URLPATH . $filename, array( 'jquery', 'slidedeck-admin' ), SLIDEDECK2_PROFESSIONAL_VERSION, true );
+        // }
     }
 
     /**
@@ -1974,6 +1980,9 @@ class SlideDeck {
         if( file_exists( SLIDEDECK2_DIRNAME . $filename ) ) {
             wp_register_style( "slidedeck-deck-{$this->name}-admin", SLIDEDECK2_URLPATH . $filename, array( 'slidedeck-admin' ), SLIDEDECK2_VERSION, 'screen' );
         }
+        // if( file_exists( SLIDEDECK2_PROFESSIONAL_DIRNAME . $filename ) ) {
+            // wp_register_style( "slidedeck-deck-{$this->name}-admin", SLIDEDECK2_PROFESSIONAL_URLPATH . $filename, array( 'slidedeck-admin' ), SLIDEDECK2_PROFESSIONAL_VERSION, 'screen' );
+        // }
     }
 
     /**
@@ -2023,6 +2032,7 @@ class SlideDeck {
             'slidedeck-frame',
             'slidedeck_frame'
         );
+        $frame_classes[] = "slidedeck-frame-{$id}";
         $frame_classes[] = "lens-{$slidedeck['lens']}";
         $frame_classes[] = "show-overlay-{$slidedeck['options']['overlays']}";
         $frame_classes[] = "display-nav-{$slidedeck['options']['display-nav-arrows']}";
@@ -2087,8 +2097,12 @@ class SlideDeck {
         foreach( (array) $slidedeck_styles_arr as $property => $value ) {
             $slidedeck_styles_str.= "$property:$value;";
         }
+
+        // Default Lazy Load Padding value
+        $default_slidedeck_lazy_load_padding = 1;
+        $slidedeck_lazy_load_padding = apply_filters( "{$this->namespace}_lazy_load_padding", $default_slidedeck_lazy_load_padding, $slidedeck );
         
-        $html = '<div id="' . $slidedeck_unique_id . '-frame" class="' . implode( " ", $frame_classes ) . '" style="' . $frame_styles_str . '">';
+        $html = '<div id="' . $slidedeck_unique_id . '-frame" class="' . implode( " ", $frame_classes ) . '" style="' . $frame_styles_str . '" data-sd2-lazy-load-padding="' . $slidedeck_lazy_load_padding . '">';
         
         $html .= apply_filters( "{$this->namespace}_render_slidedeck_before", "", $slidedeck );
         
@@ -2348,7 +2362,7 @@ class SlideDeck {
                 'link' => "https://twitter.com/intent/tweet",
                 'url_params' => array(
                     'url' => esc_url( $permalink ),
-                    'hashtags' => "slidedeck",
+                    'via' => "slidedeck",
                     'related' => "slidedeck",
                     'text' => $tweet_text
                 ),
@@ -2416,9 +2430,15 @@ class SlideDeck {
      * @return object $slidedeck Updated SlideDeck object
      */
     final public function save( $id = null, $params = array() ) {
+        global $SlideDeckPlugin;
+        
         // Fail silently if not parameters were passed in
         if( !isset( $id ) || empty( $params ) ) {
             return false;
+        }
+        
+        if( $SlideDeckPlugin->get_option( 'flush_wp_object_cache' ) ){
+            wp_cache_flush();
         }
         
         // Clean the data for safe storage

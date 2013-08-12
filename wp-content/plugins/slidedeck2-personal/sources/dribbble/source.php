@@ -71,8 +71,8 @@ class SlideDeckSource_Dribbble extends SlideDeck {
                 $images[ $index ]['width'] = $entry->width;
                 $images[ $index ]['height'] = $entry->height;
                 $images[ $index ]['created_at'] = strtotime( $entry->created_at );
-                $images[ $index ]['image'] = $entry->image_url;
-                $images[ $index ]['thumbnail'] = $entry->image_teaser_url;
+                $images[ $index ]['image'] = preg_replace( '/^(http:|https:)/', '', $entry->image_url );
+                $images[ $index ]['thumbnail'] = preg_replace( '/^(http:|https:)/', '', $entry->image_teaser_url );
                 $images[ $index ]['permalink'] = $entry->url;
                 $images[ $index ]['comments_count'] = $entry->comments_count;
                 $images[ $index ]['likes_count'] = $entry->likes_count;
