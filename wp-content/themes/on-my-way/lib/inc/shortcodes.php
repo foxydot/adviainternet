@@ -91,7 +91,7 @@ class msd_icon_desc_walker extends Walker_Nav_Menu {
 			$class_names = ' class="' . esc_attr( $class_names ) . '"';
 			
 			foreach ($item->classes AS $class){
-				if(stristr($class,'my-icon')){
+				if(stristr($class,'my-')){
 					$icon_class[] = preg_replace('/my\-/i', '', $class);
 				}
 			}
@@ -114,3 +114,39 @@ class msd_icon_desc_walker extends Walker_Nav_Menu {
 			$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
 		}
 	}
+	
+add_shortcode('carousel','msd_bootstrap_carousel');
+function msd_bootstrap_carousel($atts){
+	$slidedeck = new SlideDeck();
+	extract( shortcode_atts( array(
+		'id' => NULL,
+	), $atts ) );
+	$sd = $slidedeck->get($id);
+	$slides = $slidedeck->fetch_and_sort_slides( $sd );
+	$i = 0;
+	foreach($slides AS $slide){
+		$active = $i==0?' active':'';
+		$items .= '
+		<div style="background: url('.$slide['image'].') center top no-repeat #000000;background-size: cover;" class="item'.$active.'">
+			<div class="carousel-caption">
+				'.$slide['content'].'
+			</div>
+		</div>';
+		$i++;
+	}
+	return msd_carousel_wrapper($items,array('id' => $id));
+}
+
+function msd_carousel_wrapper($slides,$params = array()){
+	extract( array_merge( array(
+	'id' => NULL,
+	'navleft' => '‹',
+	'navright' => '›'
+	), $params ) );
+	return '
+<div class="carousel slide" id="myCarousel_'.$id.'">
+	<div class="carousel-inner">'.($slides).'</div>
+	<a data-slide="prev" href="#myCarousel_'.$id.'" class="left carousel-control">'.$navleft.'</a>
+	<a data-slide="next" href="#myCarousel_'.$id.'" class="right carousel-control">'.$navright.'</a>
+</div>';
+}

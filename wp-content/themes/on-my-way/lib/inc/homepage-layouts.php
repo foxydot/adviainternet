@@ -56,6 +56,7 @@ function msd_scrollie_page(){
 	$edit = get_edit_post_link($post->ID) != ''?'<a href="'.get_edit_post_link($post->ID).'"><i class="icon-edit"></i></a>':'';
 	$thumbnail = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full' );
 	$background = $thumbnail?' style="background-image:url('.$thumbnail[0].');"':'';
+	remove_filter('the_content','wpautop',12);
 	print '<div id="intro" class="scrollie parent div-intro div0">
 				<div class="background-wrapper"'.$background.'>
 						<div class="wrap">
@@ -69,6 +70,8 @@ function msd_scrollie_page(){
 					</div>
 				</div>';
 	print '<div id="callout"><p>'.get_option('blogdescription').'</p></div>';
+
+	add_filter('the_content','wpautop',12);
 	$my_wp_query = new WP_Query();
 	$args = array(
 			'post_type' => 'page',

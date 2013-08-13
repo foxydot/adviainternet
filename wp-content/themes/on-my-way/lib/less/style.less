@@ -67,14 +67,24 @@ textarea,
 	border: 0px solid @medgrey;
 }
 
-input,
-select,
-textarea {
-	.box-shadow(inset 0 1px 5px @medgrey);
-	.rounded(6px);
-	font-size: 12px;
-	padding: 5px;
+textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input , select,
+input[type="button"],
+input[type="submit"] {
+	width: 98% !important;
+	.rounded(0px);
+	font-size: 14px;
+	color: @dkgrey;
+	text-transform: uppercase;
+	background: @brtblue;
+	border: none;
+	padding: 1em 1% !important;
 }
+
+input[type="button"],
+input[type="submit"] {
+	text-align: center;
+	background: @vltblue;
+	}
 
 /* Hyperlinks
 ------------------------------------------------------------ */
@@ -713,13 +723,6 @@ h5 {
 		}
 	}
 }
-/* Form Buttons
------------------------------------------------------------- */
-
-input[type="button"],
-input[type="submit"] {
-	.button(@green);
-}
 
 /* Search Form
 ------------------------------------------------------------ */
@@ -971,10 +974,6 @@ input.searchsubmit:hover {
 .alignleft {float: left;margin-right: 1em;}
 .aligncenter {text-align: center;margin: 0 auto;display: block;}
 
-/* Gravity Forms */
-.gform_wrapper .top_label .gfield_label { font-weight: normal !important; font-size: .8em; }
-.gform_wrapper .top_label input.medium { width: 100% !important; padding: 0.5em 0.5em 0.5em 0.5em !important;}
-.gform_wrapper .gform_footer { padding: 0 !important; margin: 0 !important; }
 /* ETC */
 #header a.readmore {.button(@green);float:right;}
 
