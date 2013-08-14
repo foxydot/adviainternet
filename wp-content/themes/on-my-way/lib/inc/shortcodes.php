@@ -46,7 +46,7 @@ function column_shortcode($atts, $content = null){
 		case 'last':
 			$classes[] = 'last';
 	}
-	return '<div class="'.implode(' ',$classes).'">'.$content.'</div>';
+	return '<div class="'.implode(' ',$classes).'">'.remove_wpautop($content).'</div>';
 }
 
 add_shortcode('columns','column_shortcode');
