@@ -76,13 +76,14 @@ class Genesis_Admin_Upgraded extends Genesis_Admin_Basic {
 				<p><?php _e( 'Genesis is sporting a fresh new look. And we\'ve taken advantage of the new HTML5 markup, as well as some snazzy CSS3. We think you\'re gonna love this.', 'genesis' ); ?></p>
 
 				<h4><?php _e( 'Removing Features', 'genesis' ); ?></h4>
-				<p><?php _e( 'We want to keep Genesis as lightweight as possible for you, nobody wants to use bloated software. So we\'ve removed the Latest Tweets widget, eNews widget, and the "post templates" feature. But fear not! If you want those features back, click below to install the handy plugins we created for you.', 'genesis' ); ?></p>
+				<p><?php _e( 'We want to keep Genesis as lightweight as possible for you, nobody wants to use bloated software. So we\'ve removed the Latest Tweets widget, eNews widget, the "post templates" feature, and the "fancy dropdowns" setting. But fear not! If you want those features back, click below to install the handy plugins we created for you.', 'genesis' ); ?></p>
 
 				<p>
 					<ul>
 						<li><?php echo genesis_plugin_install_link( 'genesis-latest-tweets', __( 'Genesis Latest Tweets Widget', 'genesis' ) ); ?></li>
 						<li><?php echo genesis_plugin_install_link( 'genesis-enews-extended', __( 'Genesis eNews Extended', 'genesis' ) ); ?></li>
 						<li><?php echo genesis_plugin_install_link( 'single-post-template', __( 'Single Post Template', 'genesis' ) ); ?></li>
+						<li><?php echo genesis_plugin_install_link( 'genesis-fancy-dropdowns', __( 'Fancy Dropdowns', 'genesis' ) ); ?></li>
 					</ul>
 				</p>
 
@@ -112,17 +113,17 @@ class Genesis_Admin_Upgraded extends Genesis_Admin_Basic {
 
 			<ul class="wp-people-group " id="wp-people-group-project-leaders">
 			<li class="wp-person">
-				<a href="http://twitter.com/nathanrice"><img src="http://0.gravatar.com/avatar/fdbd4b13e3bcccb8b48cc18f846efb7f?s=120" class="gravatar" alt="Nathan Rice" /></a>
+				<a href="http://twitter.com/nathanrice"><img src="//0.gravatar.com/avatar/fdbd4b13e3bcccb8b48cc18f846efb7f?s=120" class="gravatar" alt="Nathan Rice" /></a>
 				<a class="web" href="http://twitter.com/nathanrice">Nathan Rice</a>
 				<span class="title"><?php _e( 'Lead Developer', 'genesis' ); ?></span>
 			</li>
 			<li class="wp-person">
-				<a href="http://twitter.com/sillygrampy"><img src="http://0.gravatar.com/avatar/7b8ff059b9a4504dfbaebd4dd190466e?s=120" class="gravatar" alt="Ron Rennick" /></a>
+				<a href="http://twitter.com/sillygrampy"><img src="//0.gravatar.com/avatar/7b8ff059b9a4504dfbaebd4dd190466e?s=120" class="gravatar" alt="Ron Rennick" /></a>
 				<a class="web" href="http://twitter.com/sillygrampy">Ron Rennick</a>
 				<span class="title"><?php _e( 'Lead Developer', 'genesis' ); ?></span>
 			</li>
 			<li class="wp-person">
-				<a href="http://twitter.com/bgardner"><img src="http://0.gravatar.com/avatar/c845c86ebe395cea0d21c03bc4a93957?s=120" class="gravatar" alt="Brian Gardner" /></a>
+				<a href="http://twitter.com/bgardner"><img src="//0.gravatar.com/avatar/c845c86ebe395cea0d21c03bc4a93957?s=120" class="gravatar" alt="Brian Gardner" /></a>
 				<a class="web" href="http://twitter.com/bgardner">Brian Gardner</a>
 				<span class="title"><?php _e( 'Lead Developer', 'genesis' ); ?></span>
 			</li>
