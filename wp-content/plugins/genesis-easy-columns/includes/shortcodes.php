@@ -1,6 +1,6 @@
 <?php
 	//Turn editor auto format off
-	remove_filter( 'the_content', 'wpautop' );
+	//remove_filter( 'the_content', 'wpautop' );
 	
 	//Column Shortcodes
 	
@@ -66,4 +66,4 @@
 	
 
 	//Turn auto format back on
-	add_filter( 'the_content', 'wpautop' , 12);
+	//add_filter( 'the_content', 'wpautop' , 12);

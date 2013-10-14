@@ -641,7 +641,7 @@ h5 {
 }
 
 .entry-content img {
-	border: 6px solid @ltgrey;
+	border: 0px solid @ltgrey;
 }
 
 
@@ -1014,4 +1014,48 @@ input.searchsubmit:hover {
 			}
 		}
 	}
+}
+
+.recent{
+  max-width: 960px;
+  .item{
+    text-align: center;
+    padding: 1em;
+    .recent_post{
+      display: inline-block;
+      width: 23%;
+      margin-right: 2%;
+      background: @white;
+      .drop-shadow(0,0,4px,0.3);
+      height: 450px;
+      top: 0;
+      h3,div{
+        padding: 0.5em 1em;
+      }
+      h3{
+        font-size: 1.75em;
+        line-height: 1em;
+        .opensans;
+        color: @green;
+      }
+      .date{
+        border-top: 0.5px @ltgrey solid;
+        border-bottom: 0.5px @ltgrey solid;
+        margin: 0.5em 1em;
+        color: @ltblue;
+        font-size: 0.9em;
+      }
+      .excerpt{
+        color: @dkgrey;
+        font-size: 0.9em;
+        text-align: left;
+      }
+    }
+    .recent_post.last-child{
+      margin-right: 0;
+    }
+    .recent_post:hover{
+      text-decoration: none;
+    }
+  }
 }

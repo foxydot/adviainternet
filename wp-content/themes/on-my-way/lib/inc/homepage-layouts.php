@@ -97,7 +97,7 @@ function msd_scrollie_page(){
 						<div class="wrap">'.$form.'
 							<div class="page-content">
 								<h2 class="entry-title">'.$child->post_title.'</h2>
-								<div class="entry-content">'.apply_filters('the_content', $child->post_content).'</div>
+								<div class="entry-content">'.do_shortcode($child->post_content).'</div>
 								'.$edit.'
 							</div>
 						</div>

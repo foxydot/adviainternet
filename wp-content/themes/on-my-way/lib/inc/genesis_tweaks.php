@@ -36,7 +36,7 @@ function msd_child_add_homepage_callout_sidebars(){
 			));
 }
 add_action('after_setup_theme','register_taxonomy_scrollie');
-add_action('wp_head', 'collections');
+//add_action('wp_head', 'collections');
 
 /**
  * override sidebar on interior pages, replace with featured image.
