@@ -72,7 +72,7 @@ if (!class_exists('MSDRecentPosts')) {
                     '.get_the_post_thumbnail($item->ID,'slider-thumb').'
                     <h3>'.$item->post_title.'</h3>
                     <div class="date">'.date('F j, Y',strtotime($item->post_date)).'</div>
-                    <div class="excerpt">'.$item->post_excerpt.'</div>
+                    <div class="excerpt">'.$excerpt.'</div>
                 </a>';
              }
             
