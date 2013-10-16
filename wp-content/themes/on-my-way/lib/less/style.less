@@ -1023,24 +1023,26 @@ input.searchsubmit:hover {
     padding: 1em;
     .recent_post{
       display: inline-block;
+      position: relative;
       width: 23%;
       margin-right: 2%;
       background: @white;
       .drop-shadow(0,0,4px,0.3);
-      height: 450px;
-      top: 0;
+      height: 500px;
+      vertical-align: top;
       h3,div{
         padding: 0.5em 1em;
       }
       h3{
-        font-size: 1.75em;
+        font-size: 1.7em;
         line-height: 1em;
         .opensans;
         color: @green;
+        min-height: 120px;
       }
       .date{
-        border-top: 0.5px @ltgrey solid;
-        border-bottom: 0.5px @ltgrey solid;
+        border-top: 1px @medgrey solid;
+        border-bottom: 1px @medgrey solid;
         margin: 0.5em 1em;
         color: @ltblue;
         font-size: 0.9em;
@@ -1048,7 +1050,29 @@ input.searchsubmit:hover {
       .excerpt{
         color: @dkgrey;
         font-size: 0.9em;
+        line-height: 1.6em;
         text-align: left;
+      }
+      .overlay{
+        display: none;
+        position: absolute;
+        top: 0;
+        left:0;
+        height: 488px;
+        width: 87%;
+        background-color: fade(@blue, 70%);
+        text-align: center;
+        .bug {
+          font-size: 0.6em;
+          font-weight: bold;
+          text-decoration: none;
+          text-align: center;
+          color: @blue;
+          background-color: @white;
+          height: 3em;
+          width: 3em;
+          .rounded(1.5em);
+        }
       }
     }
     .recent_post.last-child{
@@ -1056,6 +1080,9 @@ input.searchsubmit:hover {
     }
     .recent_post:hover{
       text-decoration: none;
+      .overlay{
+        display: block;
+      }
     }
   }
 }

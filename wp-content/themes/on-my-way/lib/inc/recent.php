@@ -73,6 +73,7 @@ if (!class_exists('MSDRecentPosts')) {
                     <h3>'.$item->post_title.'</h3>
                     <div class="date">'.date('F j, Y',strtotime($item->post_date)).'</div>
                     <div class="excerpt">'.$excerpt.'</div>
+                    <div class="overlay"><div class="bug">Read This</div></div>
                 </a>';
              }
             

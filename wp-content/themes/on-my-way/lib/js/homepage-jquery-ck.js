@@ -1,0 +1,1 @@
+jQuery(document).ready(function(e){var t=e(".footer-widgets-1 div.widget").length;e(".footer-widgets-1").addClass("cols-"+t);e(".footer-widgets-1 .widget,.footer-widgets-1 .widget .widget-wrap").equalHeights();e(".carousel").carousel()});
