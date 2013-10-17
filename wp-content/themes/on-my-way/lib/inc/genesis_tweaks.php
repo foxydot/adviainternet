@@ -11,7 +11,6 @@ function do_page_title(){
         remove_all_actions('genesis_sidebar');
         add_action( 'genesis_sidebar', 'msd_post_image', 8 );
         remove_action( 'genesis_before_post_content', 'genesis_post_info' );
-        
 		remove_all_actions('genesis_post_title');
 		add_action('genesis_post_title','msdlab_do_post_subtitle');
 		print '<div id="page-title" class="title-area"><div class="wrap"><h1 class="entry-title">'.get_the_title($post->ID).'</h1></div></div>';
