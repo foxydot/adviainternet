@@ -91,7 +91,7 @@ h4{font-size:18px}
 .widget-area h4 a{color:#e7e7e7;text-decoration:none}
 #footer-widgets h4{background:none;border:none;padding:0}
 h5{font-size:18px}
-.post h1.entry-title,.page h2.entry-subtitle{font-size:40px;color:#0c4e6e}
+.post h1.entry-title,.post h2.entry-title,.page h2.entry-subtitle{font-size:40px;color:#0c4e6e}.post h1.entry-title a,.post h2.entry-title a,.page h2.entry-subtitle a,.post h1.entry-title a:visited,.post h2.entry-title a:visited,.page h2.entry-subtitle a:visited{font-size:40px;color:#0c4e6e}
 .taxonomy-description h1{margin:0}
 #page-title{min-height:170px;background:#79ab41 url(../img/bkg-services.png) no-repeat center center}#page-title h1{color:#fff;font-size:5em;text-align:center;font-weight:700;line-height:2.2em}
 .archive-page ul li,.entry-content ul li,.hentry ul li{list-style:square inside none;margin-bottom:.25em}
@@ -165,3 +165,5 @@ input.searchsubmit,input.searchsubmit:hover{background:#79ab41;background:-webki
 .recent .item .recent_post .overlay{display:none;position:absolute;top:0;left:0;height:488px;width:87%;background-color:rgba(12,78,110,0.7);text-align:center}.recent .item .recent_post .overlay .bug{font-size:.6em;font-weight:bold;text-decoration:none;text-align:center;color:#0c4e6e;background-color:#fff;height:3em;width:3em;-webkit-border-radius:1.5em;-moz-border-radius:1.5em;border-radius:1.5em;-moz-background-clip:padding;-webkit-background-clip:padding-box;background-clip:padding-box}
 .recent .item .recent_post.last-child{margin-right:0}
 .recent .item .recent_post:hover{text-decoration:none}.recent .item .recent_post:hover .overlay{display:block}
+.blog #inner .post,.single-post #inner .post{background:#fff;-webkit-box-shadow:0 0 4px rgba(0,0,0,0.5);-moz-box-shadow:0 0 4px rgba(0,0,0,0.5);box-shadow:0 0 4px rgba(0,0,0,0.5)}.blog #inner .post .entry-title,.single-post #inner .post .entry-title,.blog #inner .post .entry-content,.single-post #inner .post .entry-content{padding:10px}
+.blog #inner .post .post-info,.single-post #inner .post .post-info{margin:10px;padding:10px 0;border-top:1px solid #bfbfbf;border-bottom:1px solid #bfbfbf}

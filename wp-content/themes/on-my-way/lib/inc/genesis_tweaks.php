@@ -8,9 +8,16 @@ add_action('genesis_after_header','do_page_title');
 function do_page_title(){
 	global $post;
 	if(is_page()){
+        remove_all_actions('genesis_sidebar');
+        add_action( 'genesis_sidebar', 'msd_post_image', 8 );
+        remove_action( 'genesis_before_post_content', 'genesis_post_info' );
+        
 		remove_all_actions('genesis_post_title');
 		add_action('genesis_post_title','msdlab_do_post_subtitle');
 		print '<div id="page-title" class="title-area"><div class="wrap"><h1 class="entry-title">'.get_the_title($post->ID).'</h1></div></div>';
+	} elseif(is_single() && get_post_type()!='page'||is_home()){
+	    add_action('genesis_before_post_title','msd_post_image');
+        print '<div id="page-title" class="title-area"><div class="wrap"><h1 class="entry-title">Blog</h1></div></div>';
 	}
 }
 
@@ -45,12 +52,14 @@ add_action('after_setup_theme','register_taxonomy_scrollie');
 add_image_size( 'sidebar-image', 450, 450, TRUE ); //image to float at the top of the post. Reversed Out does these a lot.
 
 /* Manipulate the featured image */
-remove_all_actions('genesis_sidebar');
-add_action( 'genesis_sidebar', 'msd_post_image', 8 );
 function msd_post_image() {
 	global $post;
 	//setup thumbnail image args to be used with genesis_get_image();
-	$size = 'sidebar-image'; // Change this to whatever add_image_size you want
+	if(get_post_type()=='page'){
+	   $size = 'sidebar-image'; // Change this to whatever add_image_size you want
+    } else {
+       $size = 'post-thumb'; // Change this to whatever add_image_size you want
+    }
 	$default_attr = array(
 			'class' => "aligncenter attachment-$size $size",
 			'alt'   => $post->post_title,
@@ -58,7 +67,7 @@ function msd_post_image() {
 	);
 
 	// This is the most important part!  Checks to see if the post has a Post Thumbnail assigned to it. You can delete the if conditional if you want and assume that there will always be a thumbnail
-	if ( has_post_thumbnail() && is_page() ) {
+	if ( has_post_thumbnail()) {
 		printf( '<a title="%s" href="%s">%s</a>', get_permalink(), the_title_attribute( 'echo=0' ), genesis_get_image( array( 'size' => $size, 'attr' => $default_attr ) ) );
 	}
 
@@ -80,7 +89,6 @@ function custom_breadcrumb_args($args) {
 remove_action('genesis_before_loop', 'genesis_do_breadcrumbs');
 add_action('genesis_before_content_sidebar_wrap', 'genesis_do_breadcrumbs');
 
-remove_action( 'genesis_before_post_content', 'genesis_post_info' );
 remove_action( 'genesis_after_post_content', 'genesis_post_meta' );
 /**
  * Add extra menu locations

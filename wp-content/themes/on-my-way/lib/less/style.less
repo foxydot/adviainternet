@@ -528,9 +528,13 @@ h5 {
 }
 
 
-.post h1.entry-title, .page h2.entry-subtitle {
+.post h1.entry-title,.post h2.entry-title, .page h2.entry-subtitle {
 	font-size: 40px;
 	color: @blue;
+	a, a:visited{
+    font-size: 40px;
+    color: @blue;
+  }
 }
 .taxonomy-description h1 {
 	margin: 0;
@@ -1082,6 +1086,23 @@ input.searchsubmit:hover {
       text-decoration: none;
       .overlay{
         display: block;
+      }
+    }
+  }
+}
+.blog,.single-post{
+  #inner{
+    .post{
+      background: @white;
+      .drop-shadow(0,0,4px,0.5);
+      .entry-title,.entry-content{
+        padding: 10px;
+      }
+      .post-info{
+        margin:10px;
+        padding: 10px 0;
+        border-top: 1px solid @medgrey;
+        border-bottom: 1px solid @medgrey;
       }
     }
   }

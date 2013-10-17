@@ -2,7 +2,7 @@
 /**
  * Add new image sizes
  */
-add_image_size('post-thumb', 225, 160, TRUE);
+add_image_size('post-thumb', 711, 380, TRUE);
 
 /**
  * Add new image sizes to the media panel
