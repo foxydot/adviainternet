@@ -75,7 +75,7 @@ function msd_post_image() {
 /** Customize search form input box text */
 add_filter( 'genesis_search_text', 'custom_search_text' );
 function custom_search_text($text) {
-	return esc_attr( 'Begin your search here...' );
+	return esc_attr( 'Search...' );
 }
 
 add_filter('genesis_breadcrumb_args', 'custom_breadcrumb_args');

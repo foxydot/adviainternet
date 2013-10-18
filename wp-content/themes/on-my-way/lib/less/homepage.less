@@ -2,6 +2,24 @@
 @import 'mixins';
 @import 'animate.less';
 
+textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input , select,
+input[type="button"],
+input[type="submit"] {
+  width: 98% !important;
+  .rounded(0px);
+  font-size: 14px;
+  color: @dkgrey;
+  text-transform: uppercase;
+  background: @brtblue;
+  border: none;
+  padding: 1em 1% !important;
+}
+
+input[type="button"],
+input[type="submit"] {
+  text-align: center;
+  background: @vltblue;
+  }
 
 #page-title {
 	display: none;
