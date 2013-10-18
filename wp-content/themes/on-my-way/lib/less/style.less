@@ -615,13 +615,17 @@ h5 {
 /* Images
 ------------------------------------------------------------ */
 
-.avatar,
+
 .featuredpage img,
 .featuredpost img,
 .post-image {
 	background-color: @ltgrey;
 	border: 1px solid @ltgrey;
 	padding: 4px;
+}
+
+.avatar{
+  margin: 0 10px 0 0;
 }
 
 .author-box .avatar {
@@ -1054,6 +1058,13 @@ input.searchsubmit:hover {
           padding: 10px 0;
           border-top: 1px solid @medgrey;
           border-bottom: 1px solid @medgrey;
+          text-transform: uppercase;
+          font-size: 0.8em;
+          font-weight: bold;
+          >span{
+            width:25%;
+            display: inline-block;
+          }
         }
       }
     }

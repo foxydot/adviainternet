@@ -71,6 +71,16 @@ function msd_post_image() {
 	}
 
 }
+/* Customize the post info function */
+add_filter( 'genesis_post_info', 'msd_post_info_filter' );
+function msd_post_info_filter($post_info) {
+    global $authordata;
+    if ( !is_page() ) {
+        $gravatar = get_avatar( get_the_author_meta( 'email' ), 32 );
+        $post_info = '<span class="author">'.$gravatar.'[post_author_posts_link]</span> <span class="post-date"><i class="icon-calendar-empty"></i> [post_date]</span> <span class="post-comments"><i class="icon-comment"></i> [post_comments]</span><span class="st_sharethis"></span>';
+        return $post_info;
+    }
+}
 
 /** Customize search form input box text */
 add_filter( 'genesis_search_text', 'custom_search_text' );
@@ -89,6 +99,10 @@ remove_action('genesis_before_loop', 'genesis_do_breadcrumbs');
 add_action('genesis_before_content_sidebar_wrap', 'genesis_do_breadcrumbs');
 
 remove_action( 'genesis_after_post_content', 'genesis_post_meta' );
+
+
+
+
 /**
  * Add extra menu locations
  */
