@@ -665,11 +665,6 @@ h5 {
 
 #sidebar {
 	float: left;
-	padding: 10px 0 0;
-.widget {
-	margin: 0 0 15px;
-	padding: 0 0 15px;
-}
 }
 
 .sidebar.widget-area ul li,
@@ -681,51 +676,47 @@ h5 {
 	word-wrap: break-word;
 }
 
-.sidebar.widget-area .widget_advanced_menu {
-	.menu {
-		padding-left: 0;
-		a:hover {text-decoration: none;}
-		>li{ display: none;}
-		>li.current-menu-ancestor, >li.current-menu-item {
-			display: block;
-			.opensans;
-			font-weight: bold;
-			font-size: 1.2em;
-			padding: 0 0 6px;
-			text-transform: uppercase;
-			a{
-				color: @green;
-				display: block;
-			}
-			ul{
-			padding: 1em 0;
-				li {
-				font-weight: normal;
-				padding: 6px 0;
-				a {
-					.arial;
-					border: none;
-					font-size: .8em;
-					color: @green;
-					text-transform: none;
-					padding-left: 6px;
-					}
-				ul{
-					padding: 0;
-					border-top: 1px solid @medgrey;
-					li{
-						a{
-					padding-left: 12px;}
-					}
-					li.last-child {border-bottom: none;}
-					}
-				}
-				li:hover,li.current-menu-item {
-					background: @white;
-				}
-			}
-		}
-	}
+.sidebar.widget-area{
+  margin: 30px 0 0;
+  background-color: @ltgrey;
+  .inner-shadow(0,0,4px,0.5);
+  .widget{
+    margin: 1em;
+    padding: 0.5em;
+    background: @white;
+    .drop-shadow(0,0,4px,0.5);
+    .widget-title{
+      background-color: @dkgrey;
+      color: @white;
+      font-weight: normal;
+      font-size: 1em;
+      margin-left: -0.5em;
+      padding: 0.5em;
+    }
+    ul{
+      li{
+        border-bottom: 1px dotted @medgrey;
+        a{color: @dkgrey;}
+      }
+    }
+  }
+  .widget.featuredpost{
+    .post{
+      margin: 0.5em 0;
+      h2{
+        a{
+          color: @blue;
+        }
+      }
+      p{
+        font-size: 0.85em;
+        margin: 0;
+        }
+      .post-info{
+        font-style: italic;
+      }
+    }
+  }
 }
 
 /* Search Form
@@ -1096,17 +1087,19 @@ input.searchsubmit:hover {
 }
 .blog,.single-post{
   #inner{
-    .post{
-      background: @white;
-      .drop-shadow(0,0,4px,0.5);
-      .entry-title,.entry-content{
-        padding: 10px;
-      }
-      .post-info{
-        margin:10px;
-        padding: 10px 0;
-        border-top: 1px solid @medgrey;
-        border-bottom: 1px solid @medgrey;
+    #content{
+      .post{
+        background: @white;
+        .drop-shadow(0,0,4px,0.5);
+        .entry-title,.entry-content{
+          padding: 10px;
+        }
+        .post-info{
+          margin:10px;
+          padding: 10px 0;
+          border-top: 1px solid @medgrey;
+          border-bottom: 1px solid @medgrey;
+        }
       }
     }
   }

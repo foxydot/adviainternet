@@ -32,4 +32,6 @@ jQuery(document).ready(function($) {
 		}
 	});
 	
+	$('.sidebar.widget-area .widget ul li a').prepend('<i class="icon-caret-right"></i> ');
+	
 });
