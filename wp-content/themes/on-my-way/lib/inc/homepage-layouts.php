@@ -75,6 +75,7 @@ function msd_scrollie_page(){
 	$my_wp_query = new WP_Query();
 	$args = array(
 			'post_type' => 'page',
+			'posts_per_page' => -1,
 			'order' => 'ASC',
 			'orderby' => 'menu_order',
 			'tax_query' => array(
