@@ -3,7 +3,7 @@
  Plugin Name: SlideDeck 2 Personal
  Plugin URI: http://www.slidedeck.com/wordpress
  Description: Create SlideDecks on your WordPress blogging platform and insert them into templates and posts. Get started creating SlideDecks from the new SlideDeck menu in the left hand navigation.
- Version: 2.3.3
+ Version: 2.3.4
  Author: digital-telepathy
  Author URI: http://www.dtelepathy.com
  License: GPL3
@@ -38,7 +38,7 @@ class SlideDeckPlugin {
         'ecf3509'
     );
     
-    static $version = '2.3.3';
+    static $version = '2.3.4';
     static $license = 'PRO';
 
     // Generally, we are not installing addons. If we are, this gets set to true.
@@ -799,6 +799,10 @@ class SlideDeckPlugin {
         add_action( "wp_ajax_{$this->namespace}_upsell_modal_content", array( &$this, 'ajax_upsell_modal_content' ) );
         add_action( "wp_ajax_{$this->namespace}_support_modal_content", array( &$this, 'ajax_support_modal_content' ) );
         add_action( "wp_ajax_{$this->namespace}_anonymous_stats_optin", array( &$this, 'ajax_anonymous_stats_optin' ) );
+
+        if( defined( 'ICL_SITEPRESS_VERSION' ) ) {
+            add_filter( "{$this->namespace}_after_custom_slide_nodes", array( &$this, 'wpml_slides' ), 1, 2 );
+        }
         
         // Append necessary lens and initialization script commands to the bottom
         // of the DOM for proper loading
@@ -1995,7 +1999,7 @@ class SlideDeckPlugin {
 
         $response = wp_remote_post( SLIDEDECK2_UPDATE_SITE . '/available-addons', array(
                 'method' => 'POST', 
-                'timeout' => 4, 
+                'timeout' => 15, 
                 'redirection' => 5, 
                 'httpversion' => '1.0', 
                 'blocking' => true,
@@ -4168,6 +4172,15 @@ class SlideDeckPlugin {
                 }
             }
         }
+    }
+
+    function wpml_slides( $slide ) {
+        if( function_exists( 'icl_translate' ) ) {
+            $slide['title'] = icl_translate( 'slidedeck', 'slide_' . $slide['id'] . '_title', $slide['title'] );
+            $slide['excerpt'] = icl_translate( 'slidedeck', 'slide_' . $slide['id'] . '_content', $slide['content'] );
+            $slide['content'] = icl_translate( 'slidedeck', 'slide_' . $slide['id'] . '_content', $slide['content'] );
+        }
+        return $slide;
     }
 
     /**
