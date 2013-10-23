@@ -78,9 +78,9 @@ blockquote p{color:#bfbfbf;font-style:italic}
 p.subscribe-to-comments{padding:20px 0 10px}
 .clear{clear:both}
 .clear-line{border-bottom:1px solid #e7e7e7;clear:both;margin:0 0 25px}
-h1,h2,h2 a,h2 a:visited,h3,h4,h5,h6{font-family:"Open Sans","Trebuchet MS",Calibri,sans-serif;color:#79ab41;line-height:1.25;margin:0 0 10px;font-weight:normal}
-h1{font-size:30px}
-h2,h2 a,h2 a:visited{font-size:24px}
+h1,h2,h2 a,h2 a:visited,h3,h4,h5,h6{font-family:"Open Sans","Trebuchet MS",Calibri,sans-serif;line-height:1.25;margin:0 0 10px;font-weight:normal}
+h1{color:#79ab41;font-size:30px}
+h2,h2 a,h2 a:visited{color:#79ab41;font-size:24px}
 h2 a,h2 a:visited{color:#353332;font-family:"Open Sans","Trebuchet MS",Calibri,sans-serif}
 h2 a:hover{color:#79ab41;text-decoration:none}
 .widget-area h2,.widget-area h2 a{font-size:14px;margin:0 0 5px}

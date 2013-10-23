@@ -235,12 +235,13 @@
                             });
                         }else{
                             elems.navWrapper.css({
-                                'padding-left': navArrowWidth,
-                                'padding-right': navArrowWidth
+                                //'padding-left': navArrowWidth,
+                                //'padding-right': navArrowWidth
                             });
                             
-                            elems.navWrapper.css('width', ( elems.slidedeck.outerWidth() - ( navArrowWidth * 2 ) ) );
-                            elems.navDeck.css('width', ( elems.slidedeck.outerWidth() - ( navArrowWidth * 2 ) ) );
+                            //elems.navWrapper.css('width', ( elems.slidedeck.outerWidth() - ( navArrowWidth * 2 ) ) );
+                            elems.navWrapper.css('width', ( elems.slidedeck.outerWidth() ) );
+                            elems.navDeck.css('width', ( elems.slidedeck.outerWidth() ) );
                             elems.navWrapper.css({
                                 'margin-left': Math.round( elems.navWrapper.outerWidth() * -0.5 ),
                                 'left': '50%'

@@ -239,7 +239,7 @@ Tags: images, posts, feeds, pages, slidedeck
 .lens-advia-portfolio.sd2-none.sd2-nav-hanging .sd-nav-wrapper {
     padding: 10px 0px;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     left: auto;
     bottom: 0;
 }
@@ -407,13 +407,13 @@ Tags: images, posts, feeds, pages, slidedeck
 }
 .lens-advia-portfolio.sd2-hairline.sd2-nav-bar .sd-nav-wrapper { border: none !important; }
 .lens-advia-portfolio .sd-nav-deck .sd-thumb {
-    width: 48px;
-    height: 48px;
+    width: 253px;
+    height: 150px;
     float: left;
     display: block;
     position: relative;
     overflow: hidden;
-    margin-left: 13px;
+    margin-left: 20px;
     margin-bottom: 3px;
     cursor: pointer;
     background-color: #fff;
@@ -724,7 +724,7 @@ Tags: images, posts, feeds, pages, slidedeck
 /** NAV ARROW STYLES **/
 .lens-advia-portfolio.sd2-nav-thumb .deck-navigation-arrows {
     position: absolute;
-    left: 0;
+    left: -75px;
     top: 50%;
     display: block;
 }
@@ -737,7 +737,7 @@ Tags: images, posts, feeds, pages, slidedeck
 .lens-advia-portfolio.sd2-nav-thumb.sd2-nav-hanging.sd2-nav-pos-bottom.sd2-small.sd2-nav-arrow-style-1 .deck-navigation-arrows { top: 12px; }
 .lens-advia-portfolio.sd2-nav-thumb .deck-navigation-arrows.next {
     left: auto;
-    right: 0;
+    right: -75px;
 }
 .lens-advia-portfolio.sd2-nav-thumb.sd2-nav-arrow-style-1 .deck-navigation-arrows {
     width: 39px;
