@@ -14,7 +14,7 @@ function do_page_title(){
 		remove_all_actions('genesis_post_title');
 		add_action('genesis_post_title','msdlab_do_post_subtitle');
 		print '<div id="page-title" class="title-area"><div class="wrap"><h1 class="entry-title">'.get_the_title($post->ID).'</h1></div></div>';
-	} elseif(is_single() && get_post_type()!='page'||is_home()){
+	} elseif(get_post_type()!='page'||is_home()){
 	    add_action('genesis_before_post_title','msd_post_image');
         print '<div id="page-title" class="title-area"><div class="wrap"><h1 class="entry-title">Blog</h1></div></div>';
 	}
@@ -67,7 +67,7 @@ function msd_post_image() {
 
 	// This is the most important part!  Checks to see if the post has a Post Thumbnail assigned to it. You can delete the if conditional if you want and assume that there will always be a thumbnail
 	if ( has_post_thumbnail()) {
-		printf( '<a title="%s" href="%s">%s</a>', get_permalink(), the_title_attribute( 'echo=0' ), genesis_get_image( array( 'size' => $size, 'attr' => $default_attr ) ) );
+		printf( '<a title="%s" href="%s">%s</a>', the_title_attribute( 'echo=0' ),get_permalink(), genesis_get_image( array( 'size' => $size, 'attr' => $default_attr ) ) );
 	}
 
 }
