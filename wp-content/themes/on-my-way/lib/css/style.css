@@ -99,7 +99,7 @@ h5{font-size:18px}
 .post-meta{border-top:1px solid #e7e7e7;clear:both;font-size:14px;padding:5px 0 0}
 .author-box{background-color:#e7e7e7}
 .author-box p{font-size:14px}
-.post-comments,.tags{background:url(images/icon-dot.png) no-repeat left;margin:0 0 0 3px;padding:0 0 0 10px}
+.post-comments,.tags{background:url(../img/icon-dot.png) no-repeat left;margin:0 0 0 3px;padding:0 0 0 10px}
 .featuredpage img,.featuredpost img,.post-image{background-color:#e7e7e7;border:1px solid #e7e7e7;padding:4px}
 .avatar{margin:0 10px 0 0}
 .author-box .avatar{background-color:#fff;float:left;margin:0 10px 0 0}
@@ -170,3 +170,4 @@ input.searchsubmit,input.searchsubmit:hover{background:#353332 url('../img/bkg-s
 .sidebar.widget-area .widget.widget_search{background-color:#0c4e6e;-webkit-box-shadow:0 0 0 rgba(0,0,0,0);-moz-box-shadow:0 0 0 rgba(0,0,0,0);box-shadow:0 0 0 rgba(0,0,0,0)}.sidebar.widget-area .widget.widget_search form{margin:0}.sidebar.widget-area .widget.widget_search form input{margin:0;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;-moz-background-clip:padding;-webkit-background-clip:padding-box;background-clip:padding-box}
 .sidebar.widget-area .widget.widget_search form input[type=text]{width:90%}
 .sidebar.widget-area .widget.widget_search form input[type=submit]{float:right;background-color:#353332}
+.readmore{background:#0c4e6e;background:-webkit-gradient(linear, left bottom, left top, color-stop(0, #020d12), color-stop(1, #168fca));background:-ms-linear-gradient(bottom, #020d12, #168fca);background:-moz-linear-gradient(center bottom, #020d12 0, #168fca 100%);-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;-moz-background-clip:padding;-webkit-background-clip:padding-box;background-clip:padding-box;border:.5px solid #020d12;-webkit-box-shadow:0 0 2px rgba(0,0,0,0.2);-moz-box-shadow:0 0 2px rgba(0,0,0,0.2);box-shadow:0 0 2px rgba(0,0,0,0.2);padding:6px 24px;font-family:"Helvetica Neue",Arial,Helvetica,sans-serif;color:#fff !important;font-size:12px;font-weight:normal;text-shadow:1px 1px 2px #000;text-transform:uppercase;display:table;margin:12px auto;filter:dropshadow(color=#000000, offx=1, offy=1);margin:12px 0}
