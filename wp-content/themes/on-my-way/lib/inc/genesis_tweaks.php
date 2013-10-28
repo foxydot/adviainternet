@@ -186,7 +186,9 @@ function msd_new_custom_layout_logic() {
 
 add_filter('excerpt_more','msd_excerpt_more_button');
 function msd_excerpt_more_button($excerpt_more){
-    global $post;
-    $excerpt_more = '… <a class="readmore" href="'.get_post_permalink($post->ID).'">Read More</a>';
-    return $excerpt_more;
+    if(!is_front_page()){
+        global $post;
+        $excerpt_more = '… <a class="readmore" href="'.get_post_permalink($post->ID).'">Read More</a>';
+        return $excerpt_more;
+    }
 }
