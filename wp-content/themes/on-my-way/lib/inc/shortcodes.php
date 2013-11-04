@@ -150,3 +150,42 @@ function msd_carousel_wrapper($slides,$params = array()){
 	<a data-slide="next" href="#myCarousel_'.$id.'" class="right carousel-control">'.$navright.'</a>
 </div>';
 }
+
+add_shortcode('get_children', 'msd_get_children');
+function msd_get_children($atts){
+    global $post;
+    extract( shortcode_atts( array(
+        'show' => array('title','content','featured_image'),
+        'orderby' => 'title',
+        'parent' => $post->post_name,
+    ), $atts ) );
+    $my_wp_query = new WP_Query();
+    $args = array(
+            'post_type' => 'page',
+            'posts_per_page' => -1,
+            'order' => 'ASC',
+            'orderby' => $orderby,
+            'tax_query' => array(
+                    array(
+                        'taxonomy' => 'msd_scrollie',
+                        'field' => 'slug',
+                        'terms' => $parent
+                        )
+                    )
+            );
+    $children = $my_wp_query->query($args);
+    $i = 1;
+    foreach($children AS $child){
+        $thumbnail = get_the_post_thumbnail($child->ID,'sidebar-image');
+        $edit = get_edit_post_link($child->ID) != ''?'<a href="'.get_edit_post_link($child->ID).'"><i class="icon-edit"></i></a>':'';
+        $ret .= '<div id="'.$child->post_name.'" class="children child div-'.$child->post_name.' div'.$i.' trigger" postid="'.$child->ID.'">
+                    <a href="'.get_permalink($child->ID).'">
+                        '.$thumbnail.'
+                        <h3>'.$child->post_title.'</h3>
+                    </a>
+                    '.$edit.'
+                </div>';
+        $i++;
+    }
+    return $ret;
+}

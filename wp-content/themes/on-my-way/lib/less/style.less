@@ -1075,67 +1075,97 @@ input.searchsubmit:hover {
       }
     }
   }
+  .sidebar.widget-area{
+    margin: 30px 0 0;
+    background-color: @ltgrey;
+    .inner-shadow(0,0,4px,0.5);
+    .widget{
+      margin: 1em;
+      padding: 0.5em;
+      background: @white;
+      .drop-shadow(0,0,4px,0.5);
+      .widget-title{
+        background-color: @dkgrey;
+        color: @white;
+        font-weight: normal;
+        font-size: 1em;
+        margin-left: -0.5em;
+        padding: 0.5em;
+      }
+      ul{
+        li{
+          border-bottom: 1px dotted @medgrey;
+          a{color: @dkgrey;}
+        }
+      }
+    }
+    .widget.featuredpost{
+      .post{
+        margin: 0.5em 0;
+        h2{
+          a{
+            color: @blue;
+          }
+        }
+        p{
+          font-size: 0.85em;
+          margin: 0;
+          }
+        .post-info{
+          font-style: italic;
+        }
+      }
+    }
+    .widget.widget_search{
+      background-color: @blue;
+      .drop-shadow(0,0,0,0);
+      form{
+        margin: 0;
+        input{
+          margin:0;
+          .rounded(0);
+          }
+        input[type=text]{
+          width: 90%;
+        }
+        input[type=submit]{
+          float:right;
+          background-color: @dkgrey;
+        }
+      }
+    }
+  }
 }
 
-
-.sidebar.widget-area{
-  margin: 30px 0 0;
-  background-color: @ltgrey;
-  .inner-shadow(0,0,4px,0.5);
-  .widget{
-    margin: 1em;
-    padding: 0.5em;
-    background: @white;
-    .drop-shadow(0,0,4px,0.5);
-    .widget-title{
-      background-color: @dkgrey;
-      color: @white;
-      font-weight: normal;
-      font-size: 1em;
-      margin-left: -0.5em;
-      padding: 0.5em;
-    }
-    ul{
-      li{
-        border-bottom: 1px dotted @medgrey;
-        a{color: @dkgrey;}
-      }
+.section-team{
+  .sidebar.widget-area{
+    img{
+      height: 250px;
+      width: 250px;
+      border: 12px solid @green;
+      .rounded(250px);
+      background-position: center center;
+      background-repeat: no-repeat;
+      margin-top: 30px;
     }
   }
-  .widget.featuredpost{
-    .post{
-      margin: 0.5em 0;
-      h2{
-        a{
-          color: @blue;
-        }
-      }
-      p{
-        font-size: 0.85em;
-        margin: 0;
-        }
-      .post-info{
-        font-style: italic;
-      }
+  .children.child{
+    width: 23%;
+    display: inline-block;
+    
+    img{
+      height: 120px;
+      width: 120px;
+      border: 12px solid @green;
+      .rounded(120px);
+      background-position: center center;
+      background-repeat: no-repeat;
     }
   }
-  .widget.widget_search{
-    background-color: @blue;
-    .drop-shadow(0,0,0,0);
-    form{
-      margin: 0;
-      input{
-        margin:0;
-        .rounded(0);
-        }
-      input[type=text]{
-        width: 90%;
-      }
-      input[type=submit]{
-        float:right;
-        background-color: @dkgrey;
-      }
-    }
+}
+.team.section-team{
+  .entry-content{
+    text-align: center;
   }
 }
 .readmore{

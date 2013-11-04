@@ -242,6 +242,39 @@ input[type="submit"] {
             margin: 0 auto;
           }
         }
+        #team{
+          background: @green;
+          h2.entry-title{
+            color: @ltgrey;
+          }
+          .entry-content{
+            text-align: center;
+            .children.child{
+              width: 23%;
+              display: inline-block;
+              h3{
+                color: @medgrey;
+              }
+              img{
+                height: 120px;
+                width: 120px;
+                border: 12px solid @medgrey;
+                .rounded(120px);
+                background-position: center center;
+                background-repeat: no-repeat;
+              }
+              a:hover{
+                text-decoration: none;
+                h3{
+                  color:@ltgrey;
+                }
+                img{
+                  border-color:@ltgrey;
+                }
+              }
+            }
+          }
+        }
         #blog,#social-media{
           background: @white;
           .entry-title{

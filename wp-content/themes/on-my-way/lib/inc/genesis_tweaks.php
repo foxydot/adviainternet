@@ -67,7 +67,7 @@ function msd_post_image() {
 
 	// This is the most important part!  Checks to see if the post has a Post Thumbnail assigned to it. You can delete the if conditional if you want and assume that there will always be a thumbnail
 	if ( has_post_thumbnail()) {
-		printf( '<a title="%s" href="%s">%s</a>', the_title_attribute( 'echo=0' ),get_permalink(), genesis_get_image( array( 'size' => $size, 'attr' => $default_attr ) ) );
+		printf( '%s', genesis_get_image( array( 'size' => $size, 'attr' => $default_attr ) ) );
 	}
 
 }
