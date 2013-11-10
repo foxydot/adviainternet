@@ -1136,6 +1136,94 @@ input.searchsubmit:hover {
     }
   }
 }
+#cff{
+  max-width: 960px;
+  text-align: center;
+  padding: 1em;
+  .cff-item{
+    text-align: center;
+    padding: 0;
+    display: inline-block;
+    clear: none;
+    float: none;
+    position: relative;
+    width: 23%;
+    margin-right: 2%;
+    background: @white;
+    .drop-shadow(0,0,4px,0.3);
+    height: 250px;
+    vertical-align: top;
+      .social-bug{
+        text-align: center;
+        position:relative;
+        top:-2em;
+        .hex{
+          position: relative;
+          color: @fbblue;
+          font-size: 3em;
+          i{
+            position: absolute;
+            font-size: .4em;
+            color: @white;
+            top:1.75em;
+            text-indent:-1.2em;
+          }
+        }
+      }
+      .cff-wrap{
+        padding: 1em;
+        position: relative;
+        top:-3em;
+        .cff-date{
+          border-top: 1px @medgrey solid;
+          border-bottom: 1px @medgrey solid;
+          margin: 0 auto;
+          padding: 0.5em 0;
+          color: @ltblue;
+          font-size: 0.9em;
+        }
+        .cff-text{
+          color: @dkgrey;
+          font-size: 0.9em;
+          line-height: 1.6em;
+          text-align: left;
+        }
+      }
+      .overlay{
+        display: none;
+        position: absolute;
+        top: 0;
+        left:0;
+        height: 238px;
+        width: 100%;
+        background-color: fade(@blue, 70%);
+        text-align: center;
+        .bug {
+          font-size: 1em;
+          font-weight: bold;
+          text-decoration: none;
+          text-align: center;
+          color: @blue;
+          background-color: @white;
+          height: 3em;
+          width: 3em;
+          .rounded(4em);
+          padding: 1em;
+          position: absolute;
+          top: 100px;
+          left: 38%;
+        }
+      }
+    }
+  .cff-item.last-child{
+    margin-right: 0;
+  }
+  .cff-item:hover{
+    .overlay{
+      display: block;
+    }
+  }
+}
 
 .section-team{
   .sidebar.widget-area{
