@@ -203,6 +203,7 @@
     	    		
     	    		if(elems.frame.hasClass('sd2-nav-hanging')){
     	    			elems.navWrapper.appendTo(elems.frame);
+    	    			elems.navDeck.css('height','140px');
     	    		}
     	    		if(elems.frame.hasClass('sd2-nav-thumb')){
     	    		    var navArrowWidth = 73;
