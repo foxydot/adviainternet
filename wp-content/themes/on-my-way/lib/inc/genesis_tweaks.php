@@ -192,3 +192,17 @@ function msd_excerpt_more_button($excerpt_more){
         return $excerpt_more;
     }
 }
+
+//tweaks for custom nav in single post
+add_filter('gspn_previous_link_args','msd_previous_link_args');
+add_filter('gspn_next_link_args','msd_next_link_args');
+
+function msd_previous_link_args($args){
+    $args['link'] = '&rsaquo;';
+    return $args;
+}
+
+function msd_next_link_args($args){
+    $args['link'] = '&lsaquo;';
+    return $args;
+}

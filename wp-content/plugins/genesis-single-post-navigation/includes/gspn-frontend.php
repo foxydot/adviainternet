@@ -58,7 +58,7 @@ function gspn_next_post_link() {
 }  // end of function gspn_next_post_link
 
 
-add_action( 'genesis_after', 'ddw_gspn_single_prev_next_links' );
+add_action( 'genesis_after_content_sidebar_wrap', 'ddw_gspn_single_prev_next_links' );
 /**
  * Output single post navigation links for display
  * 1) Check for constant, on TRUE reverse link direction
