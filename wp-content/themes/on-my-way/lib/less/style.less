@@ -281,14 +281,15 @@ body {
 				padding: 0;
 				background: none;
 				border-top: none;
-				color: @medgrey;
+				color: @blue;
 				width: auto;
 				text-align: left;
 			}
 		}
-		li.first-child {border-top:none;}
-		li.last-child {border-bottom:none;}
+		li.first-child {border-top:none;.rounded(12px 12px 0 0)}
+		li.last-child {border-bottom:none;.rounded(0 0 12px 12px)}
 		li:hover {
+		  background-color: @white;
 			a{color:@blue;}
 		}
 	}
