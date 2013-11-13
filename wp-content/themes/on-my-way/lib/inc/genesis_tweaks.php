@@ -207,3 +207,20 @@ echo '</div><!-- .loop-nav -->';
 }
  
 }
+
+//tweaks for forcing redirect to actual websites from work
+add_action('template_redirect','msd_portfolio_interruptor');
+function msd_portfolio_interruptor(){
+    if(get_post_type()!="msd_portfolio"){ //bail early
+        return false;
+    }
+    global $portfolio,$post;
+    $portfolio->the_meta($post->ID);
+    $newURL = $portfolio->get_the_value('website');
+    if($newURL!=''){
+        header('Location: '.$newURL);
+    }
+    //print '<meta http-equiv="refresh" content="0;url='.$newURL.'">';
+    return true;
+}
+
