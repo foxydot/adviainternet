@@ -94,7 +94,9 @@ h5{font-size:18px}
 .post h1.entry-title,.post h2.entry-title,.page h2.entry-subtitle{font-size:40px;color:#0c4e6e}.post h1.entry-title a,.post h2.entry-title a,.page h2.entry-subtitle a,.post h1.entry-title a:visited,.post h2.entry-title a:visited,.page h2.entry-subtitle a:visited{font-size:40px;color:#0c4e6e}
 .taxonomy-description h1{margin:0}
 #page-title{min-height:170px;background:#79ab41 url(../img/bkg-services.png) no-repeat center center}#page-title h1{color:#fff;font-size:5em;text-align:center;font-weight:700;line-height:2.2em}
-.archive-page ul li,.entry-content ul li,.hentry ul li{list-style:square inside none;margin-bottom:.25em}
+.entry-content ol,.entry-content ul{margin-left:2em}
+.archive-page ul li,.entry-content ul li,.hentry ul li{list-style:circle outside none;margin-bottom:.5em}
+.entry-content ol li{list-style:decimal outside none;margin-bottom:.5em}
 .post-info{font-size:14px;margin:-5px 0 15px}
 .post-meta{border-top:1px solid #e7e7e7;clear:both;font-size:14px;padding:5px 0 0}
 .author-box{background-color:#e7e7e7}
