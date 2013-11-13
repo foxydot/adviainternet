@@ -194,15 +194,16 @@ function msd_excerpt_more_button($excerpt_more){
 }
 
 //tweaks for custom nav in single post
-add_filter('gspn_previous_link_args','msd_previous_link_args');
-add_filter('gspn_next_link_args','msd_next_link_args');
-
-function msd_previous_link_args($args){
-    $args['link'] = '&rsaquo;';
-    return $args;
+add_action( 'genesis_after_post', 'ac_next_prev_post_nav' );
+ 
+function ac_next_prev_post_nav() {
+if ( is_single() ) {
+ 
+echo '<div class="loop-nav">';
+previous_post_link( '<div class="previous">%link</div>', '&lsaquo; Previous' );
+next_post_link( '<div class="next">%link</div>', 'Next &rsaquo;' );
+echo '</div><!-- .loop-nav -->';
+ 
 }
-
-function msd_next_link_args($args){
-    $args['link'] = '&lsaquo;';
-    return $args;
+ 
 }

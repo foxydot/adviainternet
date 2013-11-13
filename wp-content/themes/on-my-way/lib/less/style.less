@@ -400,6 +400,7 @@ body {
 .post {
 	margin: 0 0 40px;
 }
+.single .post{margin: 0 0 20px;}
 
 .entry-content {
 	overflow: hidden;
@@ -1050,7 +1051,16 @@ input.searchsubmit:hover {
 .blog,.single-post,.archive{
   #inner{
     #content{
-      .post{
+      .loop-nav{
+        div{
+          display: inline-block;
+          margin: 0 0.5em;
+        }
+        .next {
+          float: right;
+        }
+      }
+      .post, .loop-nav{
         background: @white;
         .drop-shadow(0,0,4px,0.5);
         .entry-title,.entry-content{
@@ -1261,25 +1271,4 @@ input.searchsubmit:hover {
 .readmore{
   .button(@blue);
   margin: 12px 0;
-}
-
-
-//stylehacks for single post nav.
-.gspn-area{
-  position: relative;
-  #gspn-prevpost,#gspn-prevpost{
-    top: 42%;
-    position: fixed;
-    a{
-      border: 0;
-      font-weight: 100;
-      color: @white;
-      background-color: @medgrey;
-      width: 66px;
-      height: 50px;
-      line-height: 0.5em;
-      .rounded(3em);
-      position: relative;
-    }
-  }
 }
