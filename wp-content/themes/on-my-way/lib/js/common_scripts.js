@@ -2,10 +2,10 @@ jQuery(document).ready(function(){
 
 /*RESPONSIVE NAVIGATION, COMBINES MENUS EXCEPT FOR FOOTER MENU*/
 
-	jQuery('.menu').not('#footer .menu, #footer-widgets .menu').wrap('<div id="nav-response" class="nav-responsive">');
-	jQuery('#nav-response').append('<a href="#" id="pull" class="closed"><strong>MENU</strong></a>');	
+	//jQuery('.menu').not('#footer .menu, #footer-widgets .menu').wrap('<div id="nav-response" class="nav-responsive">');
+	//jQuery('#nav-response').append('<a href="#" id="pull" class="closed"><strong>MENU</strong></a>');	
 	
-	sf_duplicate_menu( jQuery('.nav-responsive ul'), jQuery('#pull'), 'mobile_menu', 'sf_mobile_menu' );
+	//sf_duplicate_menu( jQuery('.nav-responsive ul'), jQuery('#pull'), 'mobile_menu', 'sf_mobile_menu' );
 	
 			
 			function sf_duplicate_menu( menu, append_to, menu_id, menu_class ){
