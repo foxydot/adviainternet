@@ -430,7 +430,7 @@ class SlideDeckLens_AdviaPortfolio extends SlideDeckLens_Scaffold {
                 				if( $slidedeck['options']['navigation-style'] == 'nav-hanging' ) {
                 					if( $slidedeck['options']['navigation-type'] == 'nav-thumb' ) {
                 						if( $size == 'large' || $size == 'medium' ) {
-                	    					$height = $og_h - 150; //edit for larger footer area
+                	    					$height = $og_h - 200; //edit for larger footer area
                 						}
                 						if( $size == 'small' ){
                 							$height = $og_h - 66;
