@@ -117,6 +117,21 @@ body {
 	color: @white;
 }
 
+::-webkit-input-placeholder {
+   color: @white;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: @white;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: @white;  
+}
+
+:-ms-input-placeholder {  
+   color: @white;  
+}
 /* Wrap
 ------------------------------------------------------------ */
 
@@ -527,7 +542,7 @@ h5 {
 }
 
 
-.post h1.entry-title,.post h2.entry-title, .page h2.entry-subtitle {
+.post h1.entry-title,.post h1.entry-subtitle,.post h2.entry-title, .page h2.entry-subtitle {
 	font-size: 40px;
 	color: @blue;
 	a, a:visited{
@@ -543,7 +558,7 @@ h5 {
 #page-title{
 	min-height: 170px;
 	background: @green url(../img/bkg-services.png) no-repeat center center;
-	h1 {
+	h2 {
 		color: @white;
 		font-size: 5em;
 		text-align: center;
@@ -559,6 +574,7 @@ h5 {
 .entry-content ol,
 .entry-content ul {
 	margin-left: 2em;
+	padding-bottom: 10px;
 }
 
 .archive-page ul li,

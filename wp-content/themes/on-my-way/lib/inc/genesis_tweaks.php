@@ -13,10 +13,10 @@ function do_page_title(){
         remove_action( 'genesis_before_post_content', 'genesis_post_info' );
 		remove_all_actions('genesis_post_title');
 		add_action('genesis_post_title','msdlab_do_post_subtitle');
-		print '<div id="page-title" class="title-area"><div class="wrap"><h1 class="entry-title">'.get_the_title($post->ID).'</h1></div></div>';
+		print '<div id="page-title" class="title-area"><div class="wrap"><h2 class="entry-title">'.get_the_title($post->ID).'</h2></div></div>';
 	} elseif(get_post_type()!='page'||is_home()){
 	    add_action('genesis_before_post_title','msd_post_image');
-        print '<div id="page-title" class="title-area"><div class="wrap"><h1 class="entry-title">Blog</h1></div></div>';
+        print '<div id="page-title" class="title-area"><div class="wrap"><h2 class="entry-title">Blog</h2></div></div>';
 	}
 }
 
