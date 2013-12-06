@@ -593,9 +593,9 @@
                 if( elems.frame.hasClass('sd2-small') ){
                     horizOffset = 3;
                 }else if( elems.frame.hasClass('sd2-medium') ){
-                    horizOffset = 50;
+                    horizOffset = 10;
                 }else if( elems.frame.hasClass('sd2-large') ){
-                    horizOffset = 50;
+                    horizOffset = 10;
                 }
                 
                 if( elems.frame.hasClass('sd2-frame') ){

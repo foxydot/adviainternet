@@ -724,18 +724,18 @@ h5 {
 .post h1.entry-title,
 .post h1.entry-subtitle,
 .post h2.entry-title,
-.page h2.entry-subtitle {
+.page h1.entry-subtitle {
   font-size: 40px;
   color: #0c4e6e;
 }
 .post h1.entry-title a,
 .post h1.entry-subtitle a,
 .post h2.entry-title a,
-.page h2.entry-subtitle a,
+.page h1.entry-subtitle a,
 .post h1.entry-title a:visited,
 .post h1.entry-subtitle a:visited,
 .post h2.entry-title a:visited,
-.page h2.entry-subtitle a:visited {
+.page h1.entry-subtitle a:visited {
   font-size: 40px;
   color: #0c4e6e;
 }
