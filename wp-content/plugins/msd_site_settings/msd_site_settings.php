@@ -38,7 +38,7 @@ function get_bizname(){
 }
 function get_address(){
 	if((get_option('msdsocial_street')!='') || (get_option('msdsocial_city')!='') || (get_option('msdsocial_state')!='') || (get_option('msdsocial_zip')!='')) {
-		$ret = '<address>';
+		$ret = '<address itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address">';
 			$ret .= (get_option('msdsocial_street')!='')?get_option('msdsocial_street').' ':'';
 			$ret .= (get_option('msdsocial_street2')!='')?get_option('msdsocial_street2').' ':'';
 			$ret .= (get_option('msdsocial_city')!='')?get_option('msdsocial_city').', ':'';
@@ -53,9 +53,9 @@ function get_address(){
 function get_digits(){
 		if((get_option('msdsocial_phone')!='') || (get_option('msdsocial_fax')!='')) {
 		$ret .= '<address>';
-			$ret .= (get_option('msdsocial_phone')!='')?'Phone: '.get_option('msdsocial_phone').' ':'';
+			$ret .= (get_option('msdsocial_phone')!='')?'Phone: <span itemprop="telephone">'.get_option('msdsocial_phone').'</span> ':'';
 			$ret .= (get_option('msdsocial_phone')!='') && (get_option('msdsocial_fax')!='')?' | ':'';
-			$ret .= (get_option('msdsocial_fax')!='')?'Fax: '.get_option('msdsocial_fax').' ':'';
+			$ret .= (get_option('msdsocial_fax')!='')?'Fax: <span itemprop="telephone">'.get_option('msdsocial_fax').'</span> ':'';
 		$ret .= '</address>';
 		return $ret;
 		} else {
