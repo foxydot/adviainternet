@@ -628,7 +628,7 @@ body {
   overflow: hidden;
 }
 .entry-content p {
-  margin: 0 0 25px;
+  margin: 0 0 1em;
 }
 blockquote {
   background: url(images/blockquote.png) no-repeat;
@@ -1327,6 +1327,14 @@ input.searchsubmit:hover {
 .blog #inner #content .loop-nav .post-info > span.share span,
 .single-post #inner #content .loop-nav .post-info > span.share span,
 .archive #inner #content .loop-nav .post-info > span.share span {
+  display: inline-block;
+}
+.blog #inner #content .post .post-info .author .vcard,
+.single-post #inner #content .post .post-info .author .vcard,
+.archive #inner #content .post .post-info .author .vcard,
+.blog #inner #content .loop-nav .post-info .author .vcard,
+.single-post #inner #content .loop-nav .post-info .author .vcard,
+.archive #inner #content .loop-nav .post-info .author .vcard {
   display: inline-block;
 }
 .blog .sidebar.widget-area,
