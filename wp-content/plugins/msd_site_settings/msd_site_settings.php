@@ -38,21 +38,22 @@ function get_bizname(){
 }
 function get_address(){
 	if((get_option('msdsocial_street')!='') || (get_option('msdsocial_city')!='') || (get_option('msdsocial_state')!='') || (get_option('msdsocial_zip')!='')) {
-		$ret = '<address itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address">';
-			$ret .= (get_option('msdsocial_street')!='')?get_option('msdsocial_street').' ':'';
-			$ret .= (get_option('msdsocial_street2')!='')?get_option('msdsocial_street2').' ':'';
-			$ret .= (get_option('msdsocial_city')!='')?get_option('msdsocial_city').', ':'';
-			$ret .= (get_option('msdsocial_state')!='')?get_option('msdsocial_state').' ':'';
-			$ret .= (get_option('msdsocial_zip')!='')?get_option('msdsocial_zip').' ':'';
+		$ret = '<address itemtype="http://schema.org/LocalBusiness">';
+			$ret .= (get_option('msdsocial_street')!='')?'<span itemprop="streetAddress">'.get_option('msdsocial_street').'</span> ':'';
+			$ret .= (get_option('msdsocial_street2')!='')?'<span itemprop="streetAddress">'.get_option('msdsocial_street2').'</span> ':'';
+			$ret .= (get_option('msdsocial_city')!='')?'<span itemprop="addressLocality">'.get_option('msdsocial_city').'</span>, ':'';
+			$ret .= (get_option('msdsocial_state')!='')?'<span itemprop="addressRegion">'.get_option('msdsocial_state').'</span> ':'';
+			$ret .= (get_option('msdsocial_zip')!='')?'<span itemprop="postalCode">'.get_option('msdsocial_zip').'</span> ':'';
 		$ret .= '</address>';
 		return $ret;
 		} else {
 			return false;
 		} 
 }
+
 function get_digits(){
 		if((get_option('msdsocial_phone')!='') || (get_option('msdsocial_fax')!='')) {
-		$ret .= '<address>';
+		$ret .= '<address itemtype="http://schema.org/LocalBusiness">';
 			$ret .= (get_option('msdsocial_phone')!='')?'Phone: <span itemprop="telephone">'.get_option('msdsocial_phone').'</span> ':'';
 			$ret .= (get_option('msdsocial_phone')!='') && (get_option('msdsocial_fax')!='')?' | ':'';
 			$ret .= (get_option('msdsocial_fax')!='')?'Fax: <span itemprop="telephone">'.get_option('msdsocial_fax').'</span> ':'';

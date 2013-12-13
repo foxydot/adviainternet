@@ -1070,9 +1070,10 @@ input.searchsubmit:hover {
   text-align: center;
 }
 #footer .creds {
-  display: none;
-  text-align: right;
-  width: 31%;
+  width: 100%;
+  font-size: 12px;
+  padding: .5em;
+  text-align: center;
 }
 /* Tools */
 .alignright {
