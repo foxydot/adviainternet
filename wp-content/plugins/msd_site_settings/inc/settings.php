@@ -15,7 +15,8 @@ function msdsocial_theme_page ()
 		'city',
 		'state',
 		'zip',
-		'phone',
+        'phone',
+        'tracking_phone',
 		'fax',
 		'email',
 		'mailing_street',
@@ -147,12 +148,18 @@ $states = array('ALABAMA'=>"AL",
 				<input name="zip" type="text" id="zip" value="<?php echo get_option('msdsocial_zip'); ?>" class="regular-text" />
 			</td>
 		</tr>
-		<tr valign="top">
-			<th scope="row"><label for="phone">Phone:</label></th>
-			<td>
-				<input name="phone" type="text" id="phone" value="<?php echo get_option('msdsocial_phone'); ?>" class="regular-text" />
-			</td>
-		</tr>
+        <tr valign="top">
+            <th scope="row"><label for="phone">Phone:</label></th>
+            <td>
+                <input name="phone" type="text" id="phone" value="<?php echo get_option('msdsocial_phone'); ?>" class="regular-text" />
+            </td>
+        </tr>
+        <tr valign="top">
+            <th scope="row"><label for="phone">Tracking Phone:</label></th>
+            <td>
+                <input name="tracking_phone" type="text" id="tracking_phone" value="<?php echo get_option('msdsocial_tracking_phone'); ?>" class="regular-text" /> If you fill this in, this is what will display in the browser, and the "real" phone number will be available only in the code.
+            </td>
+        </tr>
 		<tr valign="top">
 			<th scope="row"><label for="fax">Fax:</label></th>
 			<td>

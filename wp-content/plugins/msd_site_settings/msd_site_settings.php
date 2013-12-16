@@ -38,7 +38,7 @@ function get_bizname(){
 }
 function get_address(){
 	if((get_option('msdsocial_street')!='') || (get_option('msdsocial_city')!='') || (get_option('msdsocial_state')!='') || (get_option('msdsocial_zip')!='')) {
-		$ret = '<address itemtype="http://schema.org/LocalBusiness">';
+		$ret = '<address itemscope itemtype="http://schema.org/LocalBusiness">';
 			$ret .= (get_option('msdsocial_street')!='')?'<span itemprop="streetAddress">'.get_option('msdsocial_street').'</span> ':'';
 			$ret .= (get_option('msdsocial_street2')!='')?'<span itemprop="streetAddress">'.get_option('msdsocial_street2').'</span> ':'';
 			$ret .= (get_option('msdsocial_city')!='')?'<span itemprop="addressLocality">'.get_option('msdsocial_city').'</span>, ':'';
@@ -51,13 +51,25 @@ function get_address(){
 		} 
 }
 
-function get_digits(){
+function get_digits($dowrap = TRUE){
 		if((get_option('msdsocial_phone')!='') || (get_option('msdsocial_fax')!='')) {
-		$ret .= '<address itemtype="http://schema.org/LocalBusiness">';
-			$ret .= (get_option('msdsocial_phone')!='')?'Phone: <span itemprop="telephone">'.get_option('msdsocial_phone').'</span> ':'';
-			$ret .= (get_option('msdsocial_phone')!='') && (get_option('msdsocial_fax')!='')?' | ':'';
-			$ret .= (get_option('msdsocial_fax')!='')?'Fax: <span itemprop="telephone">'.get_option('msdsocial_fax').'</span> ':'';
-		$ret .= '</address>';
+		    if((get_option('msdsocial_tracking_phone')!='')){
+		        if(wp_is_mobile()){
+		          $ret .= 'Phone: <a href="tel:+1'.get_option('msdsocial_tracking_phone').'">'.get_option('msdsocial_tracking_phone').'</a> ';
+		        } else {
+		          $ret .= 'Phone: <span>'.get_option('msdsocial_tracking_phone').'</span> ';
+		        }
+		      $ret .= '<span itemprop="telephone" style="display: none;">'.get_option('msdsocial_phone').'</span> ';
+		    } else {
+		        if(wp_is_mobile()){
+		          $ret .= (get_option('msdsocial_phone')!='')?'Phone: <a href="tel:+1'.get_option('msdsocial_phone').'" itemprop="telephone">'.get_option('msdsocial_phone').'</a> ':'';
+		        } else {
+                  $ret .= (get_option('msdsocial_phone')!='')?'Phone: <span itemprop="telephone">'.get_option('msdsocial_phone').'</span> ':'';
+		        }
+		    }
+			$ret .= ((get_option('msdsocial_phone')!='') || (get_option('msdsocial_tracking_phone')!='')) && (get_option('msdsocial_fax')!='')?' | ':'';
+            $ret .= (get_option('msdsocial_fax')!='')?'Fax: <span itemprop="faxNumber">'.get_option('msdsocial_fax').'</span> ':'';
+		  if($dowrap){$ret = '<address itemscope itemtype="http://schema.org/LocalBusiness">'.$ret.'</address>';}
 		return $ret;
 		} else {
 			return false;
