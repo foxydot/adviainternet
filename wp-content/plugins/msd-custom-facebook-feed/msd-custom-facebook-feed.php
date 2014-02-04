@@ -439,16 +439,16 @@ function display_cff($atts) {
                 //***COMPILE SECTION VARIABLES***//
                 //********************************//
                 //Set the post link
-                $link = $news->link;
+                //$link = $news->link;
+                $link = '';
                 //Is it a shared album?
                 $shared_album_string = 'shared an album:';
                 $shared_album = stripos($news->story, $shared_album_string);
                 if ( $shared_album ) {
                     $link = str_replace('photo.php?','media/set/?',$link);
                 }
-
                 //If there's no link provided then link to either the Facebook page or the individual status
-                if (empty($news->link)) {
+                if (empty($link)) {
                     if ($cff_link_to_timeline == true){
                         //Link to page
                         $link = 'http://facebook.com/' . $page_id;
