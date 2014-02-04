@@ -248,29 +248,29 @@ body {
   font-size: 14px;
   margin: 0;
 }
-::-moz-selection {
+*::-moz-selection {
   background-color: #79ab41;
   color: #ffffff;
 }
-::selection {
+*::selection {
   background-color: #79ab41;
   color: #ffffff;
 }
-::-webkit-input-placeholder {
-  color: #ffffff;
+*::-webkit-input-placeholder {
+  color: #ffffff !important;
   opacity: 1;
 }
-:-moz-placeholder {
+*:-moz-placeholder {
   /* Firefox 18- */
   color: #ffffff;
   opacity: 1;
 }
-::-moz-placeholder {
+*::-moz-placeholder {
   /* Firefox 19+ */
   color: #ffffff;
   opacity: 1;
 }
-:-ms-input-placeholder {
+*:-ms-input-placeholder {
   color: #ffffff;
   opacity: 1;
 }

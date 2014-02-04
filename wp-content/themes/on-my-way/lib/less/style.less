@@ -107,35 +107,37 @@ body {
 	}
 }
 
-::-moz-selection {
+*::-moz-selection {
 	background-color: @green;
 	color: @white;
 }
 
-::selection {
+*::selection {
 	background-color: @green;
 	color: @white;
 }
 
-::-webkit-input-placeholder {
-   color: @white;
+*::-webkit-input-placeholder {
+   color: @white !important;
    opacity: 1;
 }
 
-:-moz-placeholder { /* Firefox 18- */
+*:-moz-placeholder { /* Firefox 18- */
    color: @white;  
    opacity: 1;
 }
 
-::-moz-placeholder {  /* Firefox 19+ */
+*::-moz-placeholder {  /* Firefox 19+ */
    color: @white;  
    opacity: 1;
 }
 
-:-ms-input-placeholder {  
+*:-ms-input-placeholder {  
    color: @white;  
    opacity: 1;
 }
+
+
 /* Wrap
 ------------------------------------------------------------ */
 
