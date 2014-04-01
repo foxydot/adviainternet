@@ -75,6 +75,29 @@ function get_digits($dowrap = TRUE){
 			return false;
 		} 
 }
+
+function get_phone($dowrap = TRUE){
+        if((get_option('msdsocial_phone')!='')) {
+            if((get_option('msdsocial_tracking_phone')!='')){
+                if(wp_is_mobile()){
+                  $ret .= '<a href="tel:+1'.get_option('msdsocial_tracking_phone').'">'.get_option('msdsocial_tracking_phone').'</a> ';
+                } else {
+                  $ret .= '<span>'.get_option('msdsocial_tracking_phone').'</span> ';
+                }
+              $ret .= '<span itemprop="telephone" style="display: none;">'.get_option('msdsocial_phone').'</span> ';
+            } else {
+                if(wp_is_mobile()){
+                  $ret .= (get_option('msdsocial_phone')!='')?'<a href="tel:+1'.get_option('msdsocial_phone').'" itemprop="telephone">'.get_option('msdsocial_phone').'</a> ':'';
+                } else {
+                  $ret .= (get_option('msdsocial_phone')!='')?'<span itemprop="telephone">'.get_option('msdsocial_phone').'</span> ':'';
+                }
+            }
+          if($dowrap){$ret = '<address itemscope itemtype="http://schema.org/LocalBusiness">'.$ret.'</address>';}
+        return $ret;
+        } else {
+            return false;
+        } 
+}
 //create copyright message
 function copyright($address = TRUE){
 	if($address){

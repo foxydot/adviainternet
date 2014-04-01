@@ -2,6 +2,15 @@
 add_theme_support( 'genesis-footer-widgets', 1 );
 add_theme_support( 'genesis-structural-wraps', array('header','inner','footer-widgets','footer') );
 
+add_action('genesis_site_title','msdlab_top_phone');
+function msdlab_top_phone(){
+    global $msd_social;
+    if($msd_social){
+        $digits = get_option('msdsocial_phone');
+        print $msd_social->get_phone();
+    }
+}
+
 add_action('genesis_before_header','genesis_do_nav');
 remove_action('genesis_after_header','genesis_do_nav');
 add_action('genesis_after_header','do_page_title');

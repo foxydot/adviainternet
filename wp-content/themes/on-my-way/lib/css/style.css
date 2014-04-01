@@ -301,6 +301,12 @@ body {
   position: relative;
   z-index: 99;
 }
+#title-area address {
+  text-align: center;
+  font-size: 18px;
+  color: #168fca;
+  padding-left: 95px;
+}
 #title {
   font-family: "Open Sans", "Trebuchet MS", Calibri, sans-serif;
   font-size: 36px;
@@ -327,7 +333,8 @@ body {
 .header-image #title-area #title a {
   background: url('../img/logo.png') no-repeat center center;
   display: block;
-  min-height: 110px;
+  min-height: 70px;
+  margin-top: 20px;
   width: 100%;
   overflow: hidden;
   padding: 0;
