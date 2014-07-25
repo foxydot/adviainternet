@@ -2,12 +2,13 @@
 add_theme_support( 'genesis-footer-widgets', 1 );
 add_theme_support( 'genesis-structural-wraps', array('header','inner','footer-widgets','footer') );
 
-add_action('genesis_site_title','msdlab_top_phone');
+add_action('genesis_header_right','msdlab_top_phone',5);
 function msdlab_top_phone(){
     global $msd_social;
     if($msd_social){
-        $digits = get_option('msdsocial_phone');
+        print '<div class="phone"><i class="fa fa-phone icon-phone circle"></i> ';
         print $msd_social->get_phone();
+        print '</div>';
     }
 }
 

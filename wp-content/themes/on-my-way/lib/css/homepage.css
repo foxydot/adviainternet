@@ -1,4 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300);
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:700);
 /*---------------------------------------------------
     LESS Elements 0.6
@@ -3582,6 +3583,11 @@ input[type="submit"] {
 #inner .wrap #content-sidebar-wrap #content {
   padding: 0;
 }
+#inner .wrap #content-sidebar-wrap #content .scrollie .background-wrapper {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
 #inner .wrap #content-sidebar-wrap #content .scrollie .background-wrapper .wrap {
   margin: 0 auto;
   max-width: 960px;
@@ -3605,6 +3611,7 @@ input[type="submit"] {
   background: #000000;
 }
 #inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap {
+  min-height: 750px;
   max-width: 3000px;
   width: 100%;
   padding: 0;
@@ -3656,6 +3663,58 @@ input[type="submit"] {
 #inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap .page-content .carousel .carousel-control.right {
   left: auto;
   right: 50px;
+}
+#inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap .page-content .entry-content {
+  padding-top: 250px;
+}
+#inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap .page-content .entry-content h1,
+#inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap .page-content .entry-content h2 {
+  font-family: "Open Sans", "Trebuchet MS", Calibri, sans-serif;
+  font-weight: 300;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+#inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap .page-content .entry-content h1 {
+  font-size: 4rem;
+}
+#inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap .page-content .entry-content h2 {
+  font-size: 3.6rem;
+}
+#inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap .page-content .entry-content .btn.btn-default {
+  border: #79ab41;
+  background: #79ab41;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #79ab41 0%, #7caf42 50%, #71a03d 51%, #71a03d 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #79ab41), color-stop(50%, #79ab41), color-stop(51%, #71a03d), color-stop(100%, #71a03d));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #79ab41 0%, #7caf42 50%, #71a03d 51%, #71a03d 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #79ab41 0%, #7caf42 50%, #71a03d 51%, #71a03d 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #79ab41 0%, #7caf42 50%, #71a03d 51%, #71a03d 100%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, #79ab41 0%, #7caf42 50%, #71a03d 51%, #71a03d 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@green', endColorstr='darken(@green, 3%)', GradientType=0);
+  /* IE6-9 */
+  text-transform: uppercase;
+  margin: 1em 0;
+  padding: 1em 2em;
+  font-size: 1.4rem;
+  border-radius: 12px;
+}
+#inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap .page-content .entry-content .btn.btn-default .circle {
+  border: 1.5px solid #5f8633;
+  background: #679137;
+  font-size: 0.8em;
+  border-radius: 100%;
+  display: inline-block;
+  height: 1.4em;
+  width: 1.4em;
+  text-align: center;
+  line-height: 1.25;
 }
 #inner .wrap #content-sidebar-wrap #content #why {
   background: #ffffff;
@@ -3886,7 +3945,10 @@ input[type="submit"] {
 #inner .wrap #content-sidebar-wrap #content #contact .page-content h4 {
   margin-top: .5em;
 }
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 1023px) {
+  #inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap {
+    min-height: 500px;
+  }
   #inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap .page-content .carousel .item {
     height: 375px;
   }
@@ -3925,6 +3987,18 @@ input[type="submit"] {
     left: auto;
     right: 5px;
   }
+  #inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap .page-content .entry-content {
+    padding-top: 150px;
+  }
+  #inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap .page-content .entry-content h1 {
+    font-size: 3rem;
+  }
+  #inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap .page-content .entry-content h2 {
+    font-size: 2.4rem;
+  }
+  #inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap .page-content .entry-content .btn.btn-default {
+    font-size: 1.2rem;
+  }
   #inner .wrap #content-sidebar-wrap #content #why {
     /* Inline Menus */
   }
@@ -3932,7 +4006,171 @@ input[type="submit"] {
     /* Inline Menus */
   }
 }
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 767px) {
+  #inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap {
+    min-height: 300px;
+  }
+  #inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap .page-content .carousel .item {
+    height: 375px;
+  }
+  #inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap .page-content .carousel .item .carousel-caption {
+    min-height: 60px;
+  }
+  #inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap .page-content .carousel .item .carousel-caption .sd2-slide-title-inner {
+    font-size: 1.2em;
+  }
+  #inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap .page-content .carousel .item .carousel-caption .sd2-slide-text {
+    width: 80%;
+  }
+  #inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap .page-content .carousel .item .carousel-caption .sd2-slide-text p {
+    font-size: 0.6em;
+  }
+  #inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap .page-content .carousel .item .carousel-caption:before {
+    border-bottom: 18px solid rgba(121, 171, 65, 0.8);
+    border-left: 18px solid transparent;
+    border-right: 18px solid transparent;
+    content: "";
+    margin-left: -18px;
+    display: inline-block;
+    position: absolute;
+    top: -18px;
+  }
+  #inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap .page-content .carousel .carousel-control {
+    border: none;
+    background: none;
+    font-size: 150px;
+    height: 50px;
+    top: auto;
+    bottom: 50px;
+    left: 5px;
+  }
+  #inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap .page-content .carousel .carousel-control.right {
+    left: auto;
+    right: 5px;
+  }
+  #inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap .page-content .entry-content {
+    padding-top: 40px;
+  }
+  #inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap .page-content .entry-content h1 {
+    font-size: 2.4rem;
+  }
+  #inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap .page-content .entry-content h1 strong {
+    display: block;
+  }
+  #inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap .page-content .entry-content h2 {
+    font-size: 1.8rem;
+  }
+  #inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap .page-content .entry-content .btn.btn-default {
+    font-size: 1.2rem;
+  }
+  #inner .wrap #content-sidebar-wrap #content #why {
+    /* Inline Menus */
+  }
+  #inner .wrap #content-sidebar-wrap #content #why .page-content li {
+    display: block;
+    width: 100%;
+    float: none;
+  }
+  #inner .wrap #content-sidebar-wrap #content #why .page-content li a {
+    text-align: left;
+  }
+  #inner .wrap #content-sidebar-wrap #content #why .page-content li a i {
+    height: 60px;
+    width: 60px;
+    border: 6px solid #79ab41;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    background-size: 60%;
+    float: left;
+    margin-right: 20px;
+  }
+  #inner .wrap #content-sidebar-wrap #content #services {
+    background: #0c4e6e;
+  }
+  #inner .wrap #content-sidebar-wrap #content #services .page-content {
+    color: #a2c6d7;
+    /* Inline Menus */
+  }
+  #inner .wrap #content-sidebar-wrap #content #services .page-content h2.entry-title {
+    color: #a2c6d7;
+  }
+  #inner .wrap #content-sidebar-wrap #content #services .page-content .entry-content .menu li {
+    display: block;
+    width: 100%;
+  }
+  #inner .wrap #content-sidebar-wrap #content #services .page-content .entry-content .menu li a {
+    color: #a2c6d7;
+    text-align: left;
+  }
+  #inner .wrap #content-sidebar-wrap #content #services .page-content .entry-content .menu li a i {
+    font-size: 2.8em;
+    color: #ffffff;
+    font-weight: normal;
+    float: left;
+    margin-right: 20px;
+  }
+  #inner .wrap #content-sidebar-wrap #content #services .page-content .entry-content .menu li a h3 {
+    color: #a2c6d7;
+  }
+  #inner .wrap #content-sidebar-wrap #content #services .page-content .entry-content .menu li a span.sub {
+    text-align: left;
+  }
+  #inner .wrap #content-sidebar-wrap #content #team {
+    background: #79ab41;
+  }
+  #inner .wrap #content-sidebar-wrap #content #team h2.entry-title {
+    color: #e7e7e7;
+  }
+  #inner .wrap #content-sidebar-wrap #content #team .entry-content {
+    text-align: center;
+  }
+  #inner .wrap #content-sidebar-wrap #content #team .entry-content .children.child {
+    width: 100%;
+    display: block;
+    text-align: left;
+  }
+  #inner .wrap #content-sidebar-wrap #content #team .entry-content .children.child h3 {
+    color: #bfbfbf;
+    margin-top: 1em;
+    padding-top: 1.5em;
+  }
+  #inner .wrap #content-sidebar-wrap #content #team .entry-content .children.child img {
+    height: 90px;
+    width: 90px;
+    border: 6px solid #bfbfbf;
+    -webkit-border-radius: 180px;
+    -moz-border-radius: 180px;
+    border-radius: 180px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    background-position: center center;
+    background-repeat: no-repeat;
+    float: left;
+    margin: 0 20px;
+  }
+  #inner .wrap #content-sidebar-wrap #content #team .entry-content .children.child a:hover {
+    text-decoration: none;
+  }
+  #inner .wrap #content-sidebar-wrap #content #team .entry-content .children.child a:hover h3 {
+    color: #e7e7e7;
+  }
+  #inner .wrap #content-sidebar-wrap #content #team .entry-content .children.child a:hover img {
+    border-color: #e7e7e7;
+  }
+  #inner .wrap #content-sidebar-wrap #content #team .entry-content .children.child:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
+}
+@media only screen and (max-width: 479px) {
   .five-sixths,
   .four-fifths,
   .four-sixths,
@@ -3971,6 +4209,21 @@ input[type="submit"] {
   #inner .wrap #content-sidebar-wrap #content .scrollie .background-wrapper .wrap .page-content h2.entry-title {
     font-size: 2em;
     font-weight: 500;
+  }
+  #inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper {
+    min-height: 200px;
+  }
+  #inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap .page-content .entry-content {
+    padding-top: 40px;
+  }
+  #inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap .page-content .entry-content h1 {
+    font-size: 1.8rem;
+  }
+  #inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap .page-content .entry-content h2 {
+    font-size: 1.4rem;
+  }
+  #inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap .page-content .entry-content .btn.btn-default {
+    font-size: 1rem;
   }
   #inner .wrap #content-sidebar-wrap #content #why {
     /* Inline Menus */
