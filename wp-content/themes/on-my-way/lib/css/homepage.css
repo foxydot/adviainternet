@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url(http://fonts.googleapis.com/css?family=Open+Sans);
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300);
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:700);
@@ -105,7 +106,6 @@
   clear: both;
   visibility: hidden;
 }
-@charset "UTF-8";
 /*
 Animate.css - http://daneden.me/animate
 Licensed under the MIT license
@@ -3591,6 +3591,7 @@ input[type="submit"] {
 #inner .wrap #content-sidebar-wrap #content .scrollie .background-wrapper .wrap {
   margin: 0 auto;
   max-width: 960px;
+  min-width: 755px;
   overflow: visible;
   width: 100%;
   padding: 30px 0;
@@ -3611,7 +3612,6 @@ input[type="submit"] {
   background: #000000;
 }
 #inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap {
-  min-height: 750px;
   max-width: 3000px;
   width: 100%;
   padding: 0;
@@ -3663,9 +3663,6 @@ input[type="submit"] {
 #inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap .page-content .carousel .carousel-control.right {
   left: auto;
   right: 50px;
-}
-#inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap .page-content .entry-content {
-  padding-top: 250px;
 }
 #inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap .page-content .entry-content h1,
 #inner .wrap #content-sidebar-wrap #content #intro.scrollie .background-wrapper .wrap .page-content .entry-content h2 {
