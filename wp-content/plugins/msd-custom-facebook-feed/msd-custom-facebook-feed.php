@@ -605,7 +605,7 @@ function display_cff($atts) {
                 $content .=  '" id="'. $news->id .'" ' . $cff_item_styles . '>';
                 
                 //add our icon
-                $content .= '<div class="social-bug"><div class="hex">&#x2B22;<i class="icon-facebook"></i></div></div>';
+                $content .= '<div class="social-bug"><div class="hex">&#x2B22;<i class="fa fa-facebook"></i></div></div>';
                 //add a wrapper
                 $content .= '<div class="cff-wrap">';
                                     

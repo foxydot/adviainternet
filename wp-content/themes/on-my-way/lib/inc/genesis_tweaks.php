@@ -6,7 +6,7 @@ add_action('genesis_header_right','msdlab_top_phone',5);
 function msdlab_top_phone(){
     global $msd_social;
     if($msd_social){
-        print '<div class="phone"><i class="fa fa-phone icon-phone circle"></i> ';
+        print '<div class="phone"><i class="fa fa-phone circle"></i> ';
         print $msd_social->get_phone();
         print '</div>';
     }
@@ -87,7 +87,7 @@ function msd_post_info_filter($post_info) {
     global $authordata;
     if ( !is_page() ) {
         $gravatar = get_avatar( get_the_author_meta( 'email' ), 32 );
-        $post_info = '<span class="author">'.$gravatar.'[post_author_posts_link]</span> <span class="post-date"><i class="icon-calendar-empty"></i> [post_date]</span> <span class="post-comments"><i class="icon-comment"></i> [post_comments]</span><span class="share"><span class="st_facebook_hcount"></span><span class="st_twitter_hcount"></span></span>';
+        $post_info = '<span class="author">'.$gravatar.'[post_author_posts_link]</span> <span class="post-date"><i class="fa fa-calendar-empty"></i> [post_date]</span> <span class="post-comments"><i class="icon-comment"></i> [post_comments]</span><span class="share"><span class="st_facebook_hcount"></span><span class="st_twitter_hcount"></span></span>';
         return $post_info;
     }
 }

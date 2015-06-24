@@ -177,7 +177,7 @@ function msd_get_children($atts){
     $i = 1;
     foreach($children AS $child){
         $thumbnail = get_the_post_thumbnail($child->ID,'sidebar-image');
-        $edit = get_edit_post_link($child->ID) != ''?'<a href="'.get_edit_post_link($child->ID).'"><i class="icon-edit"></i></a>':'';
+        $edit = get_edit_post_link($child->ID) != ''?'<a href="'.get_edit_post_link($child->ID).'"><i class="fa fa-edit"></i></a>':'';
         $ret .= '<div id="'.$child->post_name.'" class="children child div-'.$child->post_name.' div'.$i.' trigger" postid="'.$child->ID.'">
                     <a href="'.get_permalink($child->ID).'">
                         '.$thumbnail.'
